@@ -1,0 +1,15 @@
+Reflection - Workshop Two - Dynamic Memory Allocation
+
+In this workshop, the primary topic I worked through was dynamic memory allocation. In some cases, the programmer may not know how much amount of memory will be needed for the program 
+prior to runtime. Dynamic memory allocation involves the process of allocating memory needs at runtime. The first deliverable for this assignment was creating my assessment module with 
+overloaded read functions. The second part involved creating my population report. 
+
+A key thing that I learned when working on these deliverables using dynamic memory allocation was ensuring that I manually deleted the allocated memory on Heap. The reason for this is 
+because the memory is not freed (deallocated) by the compiler itself, even if the scope of allocated memory finishes, which will cause a memory leak if not manually deleted. I learned this 
+because I experienced a memory leak error while I compiled by using Valgrind. More specifically, I allocated the memory for the double value without using a square bracket and I deleted 
+the memory using the square bracket, which caused a memory leak. I fixed this by removing the square bracket on the delete memory. 
+
+The other thing I struggled with is the int read function. I placed the whole array for the assessment module memory allocation outside of my loop to compare if the number of records read 
+is equal to 13. In doing so, I found the data did not load as what I expected. After a period of time troubleshooting, I found the bug and corrected the logic. Upon running and compiling 
+the program, it had run successfully with no memory leak. I found part two of the workshop to be easier to code compared with the first part because of what I learned in part one. 
+Therefore, I was able to reduce errors during coding, as well as identify errors more efficiently.

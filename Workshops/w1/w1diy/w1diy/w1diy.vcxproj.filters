@@ -15,8 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="prg.cpp">
+    <ClCompile Include="w1p2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\workshop1DIY\workshop1DIY\dictionary.txt" />
   </ItemGroup>
 </Project>
