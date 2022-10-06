@@ -127,14 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Downloads\OOP-Workshops-main(4)\OOP-Workshops-main\WS04\lab\main.cpp" />
-    <ClCompile Include="..\..\..\..\..\Downloads\OOP-Workshops-main(4)\OOP-Workshops-main\WS04\lab\Seat.cpp" />
+    <None Include="passengers.csv" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\..\Downloads\OOP-Workshops-main(4)\OOP-Workshops-main\WS04\lab\passengers.csv" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Seat.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Downloads\OOP-Workshops-main(4)\OOP-Workshops-main\WS04\lab\Seat.h" />
+    <ClInclude Include="Seat.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

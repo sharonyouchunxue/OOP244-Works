@@ -20,7 +20,7 @@ complete my workshops and assignments.
 namespace sdds {
 	class Seat {
 	private:
-		char* m_passengerName;
+		char* m_passengerName{}; // char* m_passengerName = nullptr;
 		int m_seatRow;
 		char m_letterSeat;
 		bool validate(int row, char letter)const;	

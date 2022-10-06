@@ -32,20 +32,21 @@ namespace sdds {
 	This method is a query, hence it does not modify the current object.
 		*/
 	bool Seat::validate(int row, char letter)const {
+		bool res = false;
 		if (row >= 1 && row <= 4)
 		{
 			if (letter == 'A' || letter == 'B' || letter == 'E' || letter == 'F')
 			{
-				return true;
+				res = true;
 			}
 		}
 		else if ((row <= 15 && row >= 7) || (row <= 38 && row >= 20)){
 			if (letter == 'A' || letter == 'B' || letter == 'C' || letter == 'D' || letter == 'E' || letter == 'F')
 			{
-				return true;
+				res = true;
 		    }
 		}
-		return true;
+		return res;
 	}
 
 	/*Since on many occasions you need to allocate memory for passenger name and copy the value
@@ -82,13 +83,16 @@ Then it will return the reference of the current object for possible future use.
 
 	/*This query returns if the object is in an empty state by returning true if the passenger
 	name pointer attribute is nullptr and false otherwise.*/
+	//bool Seat::isEmpty() const {
+	//	bool ret = false;
+	//	if (m_passengerName == nullptr) {
+	//		ret = true;
+	//	}
+	//	return ret;
+	//}
 	bool Seat::isEmpty() const {
-		if (m_passengerName == nullptr) {
-			return true;
-		}
-		return false;
+		return m_passengerName == nullptr;
 	}
-
 	/*This query returns true if the seats are assigned and valid by returning the validate method
 	call result.
 	Note: To see if the seat is assigned or not, we need to get row and letter that we are keeping
@@ -111,12 +115,12 @@ Then it will return the reference of the current object for possible future use.
 	Then sets the seat row and letter to zero.*/
 	Seat::Seat(const char* passengerName) {
 		reset();
-		if (m_passengerName && m_passengerName[0]) {
+		if (passengerName && passengerName[0]) {
 			this->m_passengerName = new char[strlen(passengerName) + 1];
 			strcpy(this->m_passengerName, passengerName);
 		}
-		m_seatRow = 0;
-		m_letterSeat = 0;
+		/*m_seatRow = 0;
+		m_letterSeat = 0;*/
 	}
 
 	/*Works exactly like the one argument constructor but instead of setting row and letter
@@ -124,9 +128,11 @@ Then it will return the reference of the current object for possible future use.
 	valid, it will set ONLY the row and letter to zero. see the set() method!*/
 	Seat::Seat(const char* passengerName, int row, char letter) {
 		reset();
-		if (m_passengerName && m_passengerName[0]) {
+		if (passengerName && passengerName[0]) {
 			this->m_passengerName = new char[strlen(passengerName) + 1];
 			strcpy(this->m_passengerName, passengerName);
+
+			// validdate row and seat please
 			m_seatRow = row;
 			m_letterSeat = letter;
 		}
@@ -142,7 +148,7 @@ Then it will return the reference of the current object for possible future use.
 	attributes will be set to these argument values. If not, the attributes will be set to zero.
 	At the end set will return the address of the current object.*/
 	Seat& Seat::set(int row, char letter) {
-		if (validate(m_seatRow, m_letterSeat)) {
+		if (validate(row, letter)) {
 			m_seatRow = row;
 			m_letterSeat = letter;
 		}
@@ -192,7 +198,7 @@ Then it will return the reference of the current object for possible future use.
 			coutRef.fill('.');
 			coutRef << m_passengerName;
 			coutRef << " ";
-			if (validate(m_seatRow, m_letterSeat) == 1) {
+			if (validate(m_seatRow, m_letterSeat)) {
 				coutRef << m_seatRow;
 				coutRef << m_letterSeat;
 			}
@@ -227,7 +233,7 @@ Then it will return the reference of the current object for possible future use.
 		cinRef >> row;
 		cinRef >> letter;
 		if (!cinRef.fail()) {	
-			alAndCp(m_passengerName);
+			alAndCp(name);
 			if (!isEmpty()) {
 				set(row, letter);
 			}
