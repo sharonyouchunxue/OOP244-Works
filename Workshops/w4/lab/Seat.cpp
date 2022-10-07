@@ -1,7 +1,7 @@
 /*
 *****************************************************************************
 						Workshop 4 - part 1
-Full Name  : Chunxue You
+Full Name  : Chunxue You(Sharon)
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
@@ -40,13 +40,14 @@ namespace sdds {
 				res = true;
 			}
 		}
-		else if ((row <= 15 && row >= 7) || (row <= 38 && row >= 20)){
+		else if ((row <= 15 && row >= 7) || (row <= 38 && row >= 20)) {
 			if (letter == 'A' || letter == 'B' || letter == 'C' || letter == 'D' || letter == 'E' || letter == 'F')
 			{
 				res = true;
-		    }
+			}
 		}
 		return res;
+		
 	}
 
 	/*Since on many occasions you need to allocate memory for passenger name and copy the value
@@ -90,8 +91,8 @@ Then it will return the reference of the current object for possible future use.
 	//	}
 	//	return ret;
 	//}
-	bool Seat::isEmpty() const {
-		return m_passengerName == nullptr;
+	bool Seat::isEmpty() const { //in c++ way to code not like ipc144
+		return m_passengerName == nullptr;// declare return is equal to false, if m_passengerName is equal to nullptr return true, otherwise return false
 	}
 	/*This query returns true if the seats are assigned and valid by returning the validate method
 	call result.
@@ -100,10 +101,11 @@ Then it will return the reference of the current object for possible future use.
 	seat is not assigned
 	*/
 	bool Seat::assigned() const {
-		if (!validate(m_seatRow, m_letterSeat)) {
-			return false;
+		bool res = false;
+		if (validate(m_seatRow, m_letterSeat)) {//logic here used to be(!) not validate,result = true,so it didn't work
+			res = true;
 		}
-		return true;
+		return res;
 	}
 	Seat::Seat() {
 		reset();
@@ -119,7 +121,7 @@ Then it will return the reference of the current object for possible future use.
 			this->m_passengerName = new char[strlen(passengerName) + 1];
 			strcpy(this->m_passengerName, passengerName);
 		}
-		/*m_seatRow = 0;
+		/*m_seatRow = 0;// if we already called reset, then no need to set seatRow and letterSeat to zero again
 		m_letterSeat = 0;*/
 	}
 
@@ -131,10 +133,11 @@ Then it will return the reference of the current object for possible future use.
 		if (passengerName && passengerName[0]) {
 			this->m_passengerName = new char[strlen(passengerName) + 1];
 			strcpy(this->m_passengerName, passengerName);
-
-			// validdate row and seat please
-			m_seatRow = row;
-			m_letterSeat = letter;
+			// validdate row and seat please(fardad)
+			if (validate(row, letter)) {
+				m_seatRow = row;
+				m_letterSeat = letter;
+			}
 		}
 	}
 
@@ -191,23 +194,25 @@ Then it will return the reference of the current object for possible future use.
 			coutRef << "Invalid Seat!";
 		}
 		else {
-			char tempName[41];
+			char tempName[41]{};
 			strncpy(tempName, m_passengerName, 40);
 			coutRef.width(40);
-			coutRef.setf(ios::left);
 			coutRef.fill('.');
-			coutRef << m_passengerName;
-			coutRef << " ";
-			if (validate(m_seatRow, m_letterSeat)) {
-				coutRef << m_seatRow;
+			coutRef.setf(ios::left);                                    
+			coutRef << tempName;
+			coutRef.unsetf(ios::left);
+			coutRef.fill(' ');
+			if (validate(m_seatRow, m_letterSeat)){
+				coutRef << " " << m_seatRow;
 				coutRef << m_letterSeat;
 			}
-			else if (m_seatRow == 0) {
-				coutRef << "___" << endl;
-			}		
+			else {
+				coutRef << " " << "___";
+			}	
 		}
 		return coutRef;
 	}
+
 
 	/*First reset the object to the empty state.
 	Then Extract the 3 values in three local function scope variables:
@@ -232,7 +237,8 @@ Then it will return the reference of the current object for possible future use.
 		cinRef.getline(name, 71, ',');
 		cinRef >> row;
 		cinRef >> letter;
-		if (!cinRef.fail()) {	
+		cinRef.ignore();
+		if (!cinRef.fail()){
 			alAndCp(name);
 			if (!isEmpty()) {
 				set(row, letter);
