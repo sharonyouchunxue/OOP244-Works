@@ -18,7 +18,6 @@ complete my workshops and assignments.
 
 #ifndef SDDS_NAMETAG_H_
 #define SDDS_NAMETAG_H_
-
 #include<cstring>
 namespace sdds {
     int const MAX_NAME_LEN = 50;

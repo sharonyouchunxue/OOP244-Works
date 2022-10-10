@@ -17,8 +17,22 @@ complete my workshops and assignments.
 */
 #ifndef SDDS_TOURBUS_H_
 #define SDDS_TOURBUS_H_
+#include "TourTicket.h"
 namespace sdds {
 
+    class TourBus {
+    private:
+        TourTicket* m_tickets{};//tourPassenger dynamic arrray
+        int m_num;//three size(4 passenger, 16 pasenger, 22 passenger)
 
+    public:
+         TourBus(int num);
+         ~TourBus();
+         bool validTour()const;
+         TourBus& board();//read
+         void startTheTour()const;//display
+        
+    };
 }
+
 #endif 

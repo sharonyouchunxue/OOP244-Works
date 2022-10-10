@@ -18,7 +18,19 @@ complete my workshops and assignments.
 
 #ifndef SDDS_TOURTICKET_H_
 #define SDDS_TOURTICKET_H_
+
+
 namespace sdds {
+    class TourTicket {
+        char m_name[41]; // passenger name
+        int m_ticketNumber;
+        void copyName(const char* str);
+    public:
+        TourTicket();
+        TourTicket& issue(const char* passengerName);
+        std::ostream& display(std::ostream& coutRef = std::cout)const;
+        bool valid()const;
+    };
 
 
 }
