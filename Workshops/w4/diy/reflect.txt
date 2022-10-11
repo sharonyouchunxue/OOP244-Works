@@ -1,0 +1,42 @@
+Reflection - Workshop Four – Constructor, Destructor, and Current Object
+In this workshop, the primary topics I worked through were constructor, destructor, and current object. A constructor is a special mechanism
+that is invoked at the time of object creation. It is used to initialize the data members of new objects generally, which ensures there are
+no undefined values. The constructor in C++ has the same name as the class or structure. It constructs the values, which provides data for 
+the object. Constructor does not have a return value or return type. A destructor is a special member function for every object when that 
+object passes out of scope or is explicitly deleted. Destructor is usually used to deallocate memory and other cleanup for a class object 
+and its class members when the object is destroyed. Current object is essentially a host object to provide data memory for the operation of
+a current member function.
+
+In part one of the workshop, I was tasked with creating a class to encapsulate the passenger’s name, seat number and letter on a Boeing 737 
+passenger airplane in a class called Seat. This class is to be used by another programmer for booking applications. I began by spending time
+on familiarizing myself with the concepts of constructor, destructor, and current object by reading the course material, as reflected on in 
+my introduction. I then put these concepts into practice by starting my code, such as defining a seat class that can hold private and public
+data and including my constructor and destructor inside of that class. For the part one workshop, the function creation process seemed to 
+proceed well based on the clear and detailed instructions. However, when I attempted to run my program, it did not produce the expected 
+result. After I struggled for a while, I contacted Professor Fardad for some advice. Professor Faradad walked through my code with me, and 
+found several bugs that were causing the problem. 
+
+The first issue related to the way I created the function for all the Boolean types, as I was using bool as the direct default true or false
+for my logic. What I should have done was create a bool result equal to false, then if the logic is true, then set the result equal to true,
+otherwise return result equal false I declared at the beginning. The second issue that was identified was my isEmpty function in regards to 
+the long and complicated way I created my function. In C++ it is ideal to use the most simple and short code for our functions if possible. 
+With this in mind, I fixed my function by returning m_passengerName == nullptr to make that simple and fast. Another issue for me was the 
+way I had coded my one argument constructor and three argument constructor in that I was using the m_passenger in my function instead of 
+the argument which is inside of the prototype. This had caused an error that the compiler could not recognize the data. 
+
+Another issue of note is that after I allocated the memory dynamically, I did not validate the value. When setting the row number and 
+letter to the value, I should always check to validate the value, then set the value to it. Another learning point for me is that I need 
+to initialize the variable by using curly bracket or equal to nullptr, otherwise it will cause a memory leak. Thankfully Professor Fardad 
+brought this point to my attention when walking through my code.
+
+For the workshop part two DIY, I was tasked with creating a module/class called TourBus to encapsulate a TourBus carrying passengers for 
+a city tour using a dynamic TourTicket array. What I found most challenging with this part was how to start the design on my own, 
+including what to put in the class so that it can hold the necessary data for the program. However, this time the instructions provided 
+most of implemented code including the whole TourTicket class in terms of completing this DIY. I also experienced an issue with the 
+boarding function. I noticed when I ran my program that if the num is equal to four, then the user should be able to enter the four 
+passenger names one by one, but it stopped after entering the first passenger name. I was struggling on this part for a while, then I 
+finally solved it by walking through the code and using the breaking point. The cause of the issue was that the m_tickets variable 
+that I was using required the use of an array that can hold the number of the names that are desired. It looks like a simple and easy 
+DIY program, but it was a challenging learning process requiring attention to many small details. As I discovered, any small error will 
+crash the whole program, which is not acceptable. Walking through and understanding the logic for the program is really important in 
+learning how to reduce bugs and be a good programmer.

@@ -33,7 +33,6 @@ namespace sdds {
         return res;
     }
 
-
     /*2.A TourBus should be created using the number of passengers it can carry.
     first constructor that receive the number of passengers, if the number is invalid,
     don't created, it becomes invalid*/
@@ -56,7 +55,7 @@ namespace sdds {
         //return TourBus object;
         char tempName[41]{};
         m_tickets = new TourTicket[m_num];
-        cout << "Bording " << m_num << " Passengers:" << endl;
+        cout << "Boarding " << m_num << " Passengers:" << endl;
         for (int i = 0; i < m_num; i++) {
             if (!m_tickets[i].valid()) {
                 cout << i + 1 << "/" << m_num << "- Passenger Name: ";
@@ -74,10 +73,10 @@ namespace sdds {
         if (m_tickets != nullptr)
         {
             cout << "Starting the tour...." << endl;
-            cout << "Passenter List:" << endl;
+            cout << "Passenger List:" << endl;
             cout << "|Row | Passenger Name                           | Num |" << endl;
             cout << "+----+------------------------------------------+-----+" << endl;
-            cout << endl;
+            //cout << endl;
             for (i = 0; i < m_num; i++)
             {
                 cout << "| ";
