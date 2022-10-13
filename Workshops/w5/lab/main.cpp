@@ -26,7 +26,7 @@ void balancesDisplay(const Apartment* apt, int num);
 int emptyApartments(const Apartment* apt, int num);
 
 int main() {
-    double value;
+    double value{};
     Apartment mixed[] = {
        {1111, 112.11},
        {2222, 223.22},

@@ -27,9 +27,29 @@ namespace sdds
         double m_balance = 0.0;
 
     public:
+        bool InvalidEmptyState()const;
+        bool ValidState()const;
+        int value()const;
+        Apartment(int value = 0);
         Apartment(int number, double balance);
         std::ostream& display()const;
+        operator bool()const;
+        operator int()const;
+        operator double()const;
+        bool operator~()const;
+        Apartment& operator=(int rightOperand);
+        Apartment& operator=(Apartment& ref);
+        Apartment& operator+=(double value);
+        Apartment& operator-=(double value);
+        Apartment& operator<<(Apartment& rightOperand);
+        Apartment& operator>>(Apartment& leftOperand);
+        //helper standalone operator
+        friend double operator+(const Apartment& leftOperand, const Apartment& rightOperand);
+        friend double operator+=(double& leftOperand, const Apartment& rightOperand);
     };
+
+   
+
 }
 
 #endif // SDDS_APARTMENT_H_
