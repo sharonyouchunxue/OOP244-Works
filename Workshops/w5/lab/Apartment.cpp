@@ -109,6 +109,8 @@ namespace sdds
         else if (rightOperand < 0) {
             InvlidEmptyState();
         }
+        m_number = -1;
+        m_balance = 0.0;
         return *this;
     }
 
