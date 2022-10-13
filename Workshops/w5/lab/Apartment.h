@@ -28,7 +28,7 @@ namespace sdds
 
     public:
         bool InvlidEmptyState()const;
-       // bool ValidState()const;
+        //bool ValidState()const;
         int value()const;
         Apartment(int value = 0);
         Apartment(int number, double balance);

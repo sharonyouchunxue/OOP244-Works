@@ -29,7 +29,7 @@ namespace sdds
 
     /*bool Apartment::ValidState() const
     {
-        return (m_number > 999 && m_number < 10000)&& m_balance > 0.0;
+        return( (m_number > 999 && m_number < 10000)&& m_balance > 0.0);
     }*/
 
     int Apartment::value() const
@@ -76,7 +76,7 @@ namespace sdds
     Apartment::operator bool() const
     {
         bool valid = false;
-        if (m_number >= 999 && m_number < 10000 && m_balance >= 0.0){
+        if (m_number >= 1000 && m_number <= 9999 && m_balance >= 0.0){
             valid = true;
         }
         return valid;
@@ -113,13 +113,14 @@ namespace sdds
     }
 
     Apartment& Apartment::operator=(Apartment& apr) {
-        Apartment temp;
-        if (m_number == 0 && apr.m_number > 0) {
-            temp.m_number = m_number;
-            temp.m_balance =m_balance;  
-            apr.m_number = temp.m_number;
-            apr.m_balance = temp.m_balance;          
-        }    
+       Apartment temp;
+       temp.m_balance = m_balance;
+       temp.m_number = m_number;
+       m_balance = apr.m_balance;
+       m_number = apr.m_number;
+       apr.m_balance = temp.m_balance;
+       apr.m_number = temp.m_number;
+      
         return *this;
     }
 
