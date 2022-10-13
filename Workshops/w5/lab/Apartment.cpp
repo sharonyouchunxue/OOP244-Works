@@ -103,7 +103,7 @@ namespace sdds
 
     Apartment& Apartment::operator=(int rightOperand)
     {
-        if (m_number == 0) {
+        if (m_number > 0) {
             m_number = rightOperand;
         }
         else if (rightOperand < 0) {
@@ -119,39 +119,38 @@ namespace sdds
        m_balance = apr.m_balance;
        m_number = apr.m_number;
        apr.m_balance = temp.m_balance;
-       apr.m_number = temp.m_number;
-      
+       apr.m_number = temp.m_number;  
         return *this;
     }
 
     Apartment& Apartment::operator+=(double value) {
-        if (m_number >0&&m_balance>=0.0&& value >0.0) {
+        if (m_number >0 &&m_balance>=0.0&& value >0.0) {
             m_balance += value;
         }    
         return *this;
     }
 
     Apartment& Apartment::operator-=(double value) {
-        if (m_number>0&&m_balance >= value&&value>=0.0) {
+        if (m_number>0 && m_balance >= value && value>=0.0) {
             m_balance -= value;
         }
         return *this;
     }
 
     Apartment& Apartment::operator<<(Apartment& rightOperand){
-        if (this->m_number > 0 && rightOperand.m_number > 0 && this->m_number != rightOperand.m_number)
+        if (m_number > 0 && rightOperand.m_number > 0 && m_number != rightOperand.m_number)
         {
-            this->m_balance += rightOperand.m_balance ;
+            m_balance += rightOperand.m_balance ;
             rightOperand.m_balance = 0;
         }
         return *this;
     }
 
     Apartment& Apartment::operator>>(Apartment& leftOperand) {
-        if (this->m_number > 0 && leftOperand.m_number > 0 && this->m_number != leftOperand.m_number)
+        if (m_number > 0 && leftOperand.m_number > 0 && this->m_number != leftOperand.m_number)
         {
-            leftOperand.m_balance += this->m_balance;
-            this->m_balance = 0;
+            leftOperand.m_balance += m_balance;
+            m_balance = 0;
         }
         return *this;
     }
