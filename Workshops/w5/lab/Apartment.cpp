@@ -22,15 +22,15 @@ complete my workshops and assignments.
 using namespace std;
 namespace sdds
 {
-    bool Apartment::InvalidEmptyState() const
+    bool Apartment::InvlidEmptyState() const
     {
         return m_number == -1 && m_balance == 0.0;
     }
 
-    bool Apartment::ValidState() const
+    /*bool Apartment::ValidState() const
     {
-        return (m_number > 999 && m_number < 10000)&& m_balance > -1;
-    }
+        return (m_number > 999 && m_number < 10000)&& m_balance > 0.0;
+    }*/
 
     int Apartment::value() const
     {
@@ -44,7 +44,6 @@ namespace sdds
 
     Apartment::Apartment(int number, double balance)
     {
-
         if (number >= 1000 && number <= 9999
             && balance >= 0)
         {
@@ -77,7 +76,7 @@ namespace sdds
     Apartment::operator bool() const
     {
         bool valid = false;
-        if (ValidState()) {
+        if (m_number >= 999 && m_number < 10000 && m_balance >= 0.0){
             valid = true;
         }
         return valid;
@@ -104,33 +103,35 @@ namespace sdds
 
     Apartment& Apartment::operator=(int rightOperand)
     {
-        if(ValidState()){
+        if (m_number == 0) {
             m_number = rightOperand;
         }
-        else {
-            InvalidEmptyState();
+        else if (rightOperand < 0) {
+            InvlidEmptyState();
         }
         return *this;
     }
 
-    Apartment& Apartment::operator=(Apartment& ref) {
+    Apartment& Apartment::operator=(Apartment& apr) {
         Apartment temp;
-        temp.m_balance = m_balance;
-        temp.m_number = m_number;
-        ref.m_balance = temp.m_balance;
-        ref.m_number = temp.m_number;
+        if (m_number == 0 && apr.m_number > 0) {
+            temp.m_number = m_number;
+            temp.m_balance =m_balance;  
+            apr.m_number = temp.m_number;
+            apr.m_balance = temp.m_balance;          
+        }    
         return *this;
     }
 
     Apartment& Apartment::operator+=(double value) {
-        if (ValidState()) {
+        if (m_number >0&&m_balance>=0.0&& value >0.0) {
             m_balance += value;
         }    
         return *this;
     }
 
     Apartment& Apartment::operator-=(double value) {
-        if (ValidState()) {
+        if (m_number>0&&m_balance >= value&&value>=0.0) {
             m_balance -= value;
         }
         return *this;

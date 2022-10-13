@@ -27,8 +27,8 @@ namespace sdds
         double m_balance = 0.0;
 
     public:
-        bool InvalidEmptyState()const;
-        bool ValidState()const;
+        bool InvlidEmptyState()const;
+       // bool ValidState()const;
         int value()const;
         Apartment(int value = 0);
         Apartment(int number, double balance);
