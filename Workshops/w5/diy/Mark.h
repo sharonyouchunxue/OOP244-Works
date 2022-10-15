@@ -1,7 +1,7 @@
 #pragma once
 /*
 *****************************************************************************
-                        Workshop 5 - part 1
+                        Workshop 5 - part 2
 Full Name  : Chunxue You
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
