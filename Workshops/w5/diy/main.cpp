@@ -31,8 +31,7 @@ int main() {
     constructorAndConversion();
     testComparison(L, E, H);
     unaryOpTest();
-    binaryTest(I);
-  
+    binaryTest(I); 
     return 0;
 }
 

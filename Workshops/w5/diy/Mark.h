@@ -18,8 +18,6 @@ complete my workshops and assignments.
 #pragma once
 #ifndef SDDS_MARK_H_
 #define SDDS_MARK_H_
-#include <iostream>
-
 
 namespace sdds
 {
@@ -27,37 +25,32 @@ namespace sdds
     private:
         int m_mark{};
     public:
-        Mark();
-        ~Mark();
-        Mark(const int value);
+        Mark(int value=0);
         operator int()const;
-        operator double()const;
-        operator char()const;
-        operator bool()const;
+        operator double();
+        operator char();
+        operator bool();
+        bool operator~();
         //== , != , <, >, <= and >=
-        bool operator==(const Mark& rightOperand);
-        bool operator!=(const Mark& rightOperand);
-        bool operator<(const Mark& rightOperand);
-        bool operator>(const Mark& rightOperand);
-        bool operator<=(const Mark& rightOperand);
-        bool operator>=(const Mark& rightOperand);
+        bool operator==(const Mark& rightOperand)const;
+        bool operator!=(const Mark& rightOperand)const;
+        bool operator<(const Mark& rightOperand)const;
+        bool operator>(const Mark& rightOperand)const;
+        bool operator<=(const Mark& rightOperand)const;
+        bool operator>=(const Mark& rightOperand)const;
         Mark& operator++();
         Mark operator++(int);
         Mark& operator--();
         Mark operator--(int);
-        bool operator~()const;
         Mark& operator<<(Mark& rightOperand);
-        Mark& operator>>(Mark& leftOperand);
+        Mark& operator>>(Mark& rightOperand);
         Mark& operator=(int value);
         Mark& operator+=(int value);
         Mark& operator-=(int value);
-        friend int operator +=(int& lefOperand, const Mark& rightOperand);
-        
-        
-
+        Mark operator+(int rightOperand)const;
+        friend Mark operator+(const int mark, const Mark& rightoperand);
+        friend int operator +(const Mark& lefOperand, const Mark& rightOperand);
     };
-
-
-
+     
 }
 #endif
