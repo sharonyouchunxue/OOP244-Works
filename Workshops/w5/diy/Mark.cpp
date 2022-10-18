@@ -5,7 +5,7 @@ Full Name  : Chunxue You
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
-Date       : 2022-10-14
+Date       : 2022-10-17
 
 Authenticity Declaration:
 I declare this submission is the result of my own work and has not been
@@ -222,17 +222,17 @@ namespace sdds {
 
     //left shift and right shift mark
     Mark& Mark::operator<<(Mark& rightOperand) {
-        if (m_mark > 0 && rightOperand.m_mark > 0 && m_mark != rightOperand.m_mark)
+        if (rightOperand && *this)
         {
-            m_mark += rightOperand.m_mark;
-            rightOperand.m_mark = 0;
+            this->m_mark += rightOperand.m_mark;
+            rightOperand = 0;
         }
         return *this;
     }
     Mark& Mark::operator>>(Mark& rightOperand) {
-        if (m_mark > 0 && rightOperand.m_mark > 0 && m_mark != rightOperand.m_mark)
+        if (rightOperand && *this)
         {
-            rightOperand.m_mark += m_mark;
+            rightOperand.m_mark += this->m_mark;
             m_mark = 0;
         }    
         return *this;

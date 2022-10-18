@@ -1,0 +1,41 @@
+Reflection - Workshop Five – Member Operators and Helper Functions
+
+In this workshop, the primary topics I worked through were member operators and helper functions. Member operators refers to the operators 
+that can be overloaded using member functions within the class definition. Helper functions operate outside of the class definition, but 
+can still support a class by having explicit parameters, including at least one of the class type being supported.
+
+In part one of the workshop, I was tasked with creating a class to complete the implementation of the apartment module, including the 
+apartment number and the rent. I began by spending time on familiarizing myself with the concepts in the readings for this chapter. I also 
+reviewed my notes from the lecture. I then put these concepts into practice by starting my code, such as defining a apartment class that can
+ hold private and public data inside of that class. For part one of the workshop, the function appeared to run smoothly. However, the 
+operator overload caused me to be very confused as it was difficult to understand. In particular, I was stuck on the swap function and left 
+right shift function. Then I finally fixed the problem by walking through the code and understanding how it works. After I submitted part 
+one, I realized I misunderstood the concept in that I coded two friend functions instead of the stand-alone function. In particular, my 
+functions were showing as per the below: 
+
+//helper standalone operator 
+friend double operator+(const Apartment& leftOperand, const Apartment& rightOperand); 
+friend double operator+=(double& leftOperand, const Apartment& rightOperand); 
+
+If I had second chance, I would code the standalone function as showing below instead:
+double operator+(const Apartment& leftOperand, const Apartment& rightOperand);
+double operator+=(double& leftOperand, const Apartment& rightOperand);
+
+For the workshop part two DIY, I was tasked with creating a C++ Module for a class called Mark to encapsulate a mark between 0 and 100. 
+This part of the code is the most complicated thing I have done as part of the workshops so far. I was stuck for a long time on the type 
+conversion function. No matter what I fixed, the implementation file never read my conversion. It gave me all boolean values of 1 or 0. 
+After walking through my code many times, I finally discovered that I was missing all the const type for all the functions that need to 
+be const, so the compiler didn't recognize the conversion type. 
+
+In addition to the const type missing, I found more errors from the prefix and binary helper functions. The prefix was missing the object,
+so it printed out the value instead of the invalid state. This was because I did not initially check the validation. For the binary 
+helper function, I was getting the number 40 with no square bracket, however the output was supposed to include the square bracket. Also, 
+the number 70 should not have included a square bracket in the output, but I received the number with bracket. The cause of this conflict 
+was due to my two plus helper function for plus operator overloading. What should have occurred is that the one with no square bracket 
+should return a integer value, and the other one with square bracket should return a object.
+
+In conclusion, I found this workshop to be very challenging, however I was able to complete it by carefully reviewing my code and 
+identifying errors. 
+
+
+
