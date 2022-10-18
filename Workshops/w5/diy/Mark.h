@@ -23,14 +23,14 @@ namespace sdds
 {
     class Mark {
     private:
-        int m_mark{};
-    public:
-        Mark(int value=0);
+        int m_mark = -1;
+    public:    
+        Mark(const int value=0);
         operator int()const;
-        operator double();
-        operator char();
-        operator bool();
-        bool operator~();
+        operator double()const;
+        operator char()const;
+        operator bool()const;
+        bool operator~()const;
         //== , != , <, >, <= and >=
         bool operator==(const Mark& rightOperand)const;
         bool operator!=(const Mark& rightOperand)const;
@@ -39,18 +39,20 @@ namespace sdds
         bool operator<=(const Mark& rightOperand)const;
         bool operator>=(const Mark& rightOperand)const;
         Mark& operator++();
-        Mark operator++(int);
+        Mark operator++(const int);
         Mark& operator--();
-        Mark operator--(int);
+        Mark operator--(const int);
         Mark& operator<<(Mark& rightOperand);
         Mark& operator>>(Mark& rightOperand);
-        Mark& operator=(int value);
-        Mark& operator+=(int value);
-        Mark& operator-=(int value);
-        Mark operator+(int rightOperand)const;
-        friend Mark operator+(const int mark, const Mark& rightoperand);
-        friend int operator +(const Mark& lefOperand, const Mark& rightOperand);
+        Mark& operator=(const int value); 
+        Mark& operator+=(const int rightOperand);
+        Mark& operator-=(const int rightOperand);
+        Mark operator+(const int rightOperand)const;
+        
     };
-     
+    int operator+=(int& value, const Mark& rightOperand);
+    int operator-=(int& value, const Mark& rightOperand);
+    int operator+(const int mark, const Mark& rightoperand);
+    Mark operator +(const Mark& lefOperand, const Mark& rightOperand);
 }
 #endif

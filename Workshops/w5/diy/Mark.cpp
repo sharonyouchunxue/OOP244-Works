@@ -21,26 +21,28 @@ complete my workshops and assignments.
 using namespace std;
 
 namespace sdds {
-    //1. construction 
+    //1. construction  
    
     Mark::Mark(int value) {
-        m_mark = 0;
         if (value >= 0 && value <= 100) {
             m_mark = value;
         }
-        else m_mark = -1;         
+        else m_mark = -1;  
     }
+
     //2. Type conversion Operators
+    Mark::operator bool()const{
+        return (m_mark >= 0 && m_mark <= 100);
+    }
     Mark::operator int()const {
         int mark = 0;
-        
         if (m_mark >= 0 && m_mark <= 100) {
             mark = m_mark;      
         }
         return mark;    
     }
 
-    Mark::operator double(){
+    Mark::operator double()const{
         double res = 0.0;
         if (m_mark >= 50 && m_mark < 60) {
             res = 1.0;
@@ -60,7 +62,7 @@ namespace sdds {
         return res;
     }
 
-    Mark::operator char(){
+    Mark::operator char()const {
         char res = 'X';
         if (m_mark >= 0&& m_mark < 50) {
             res = 'F';
@@ -78,10 +80,6 @@ namespace sdds {
             res = 'A';
         }
         return res;
-    }
-   
-    Mark::operator bool(){       
-        return (m_mark >= 0 && m_mark <= 100);
     }
    
     //3. Comparison operator overloads
@@ -113,26 +111,34 @@ namespace sdds {
     //4. Unary operators:
     //The ++ and -- operators (postfix and prefix) work with a mark exactly as they do with an integer, 
     //except that they don't take any action if the mark is invalid
-    Mark& Mark::operator++() {
-        m_mark++;
+    Mark& Mark::operator++(){
+        if (*this) {
+            m_mark++;
+        }
         return *this;
     }
-    Mark Mark::operator++(int) {
-        m_mark++;
+    Mark Mark::operator++(const int) {
+        if (*this) {
+            m_mark++;
+        }
         return Mark(m_mark - 1);
     }
 
     Mark& Mark::operator--() {
-        m_mark--;
+        if (*this) {
+            m_mark--;
+        }
         return *this;
     }
-    Mark Mark::operator--(int) {
-        m_mark--;
+    Mark Mark::operator--(const int) {
+        if (*this) {
+            m_mark--;
+        }
         return Mark(m_mark + 1);
     }
 
     //~ operator returns true if the mark is a pass.
-    bool Mark::operator~()
+    bool Mark::operator~()const
     {
         bool pass = false;
         if (m_mark >= 50 && m_mark<= 100) {
@@ -143,56 +149,73 @@ namespace sdds {
 
     //5. Binary Operators
     //assignment operator
-    Mark& Mark::operator=(int value){
+    Mark& Mark::operator=(const int value){
         if (value >= 0 && value <= 100) {
             m_mark = value;
         }
         else {
-            m_mark = 0;
+            m_mark = -1;
         }
         return *this;
     }
 
     // add value and deduct value by using += and -=
-    Mark& Mark::operator+=(int value) {
+     Mark& Mark::operator+=(const int value) {
         if (m_mark >= 0 && m_mark <= 100) {
             m_mark += value;
         }
-        else {
-            m_mark = 0;
-        }
+      /*  else {
+            m_mark = -1;
+        }*/
         return *this;
     }
-    Mark& Mark::operator-=(int value) {
+     Mark& Mark::operator-=(const int value) {
         if (m_mark >= 0 && m_mark <= 100) {
             m_mark -= value;
         }
-        else {
+       /* else {
             m_mark = 0;
-        }
+        }*/
         return *this;
     }
 
    // A mark's value can be added to an integer or deducted from an integer, returning the integer 
    //after the operation. Invalid marks will not have any effect on the value of the integer.
-    Mark Mark::operator+(int righOperand) const {
+    Mark Mark::operator+(const int righOperand)const{
             return Mark(m_mark + righOperand);        
     }
 
-    Mark operator+(const int mark, const Mark& rightoperand)
+    int operator+=(int& value, const Mark& rightOperand)
+    {
+        if (value) {
+            value += int(rightOperand);
+        }
+        return value;
+    }
+
+    int operator-=(int& value, const Mark& rightOperand)
+    {
+        if (value) {
+            value -= int(rightOperand);
+        }
+        return value;
+        
+    }
+
+    int operator+(const int mark, const Mark& rightoperand)
     {
         int sum = 0;
-        if (rightoperand.m_mark >= 0 && rightoperand.m_mark <= 100 && mark >= 0 && mark <= 100) {
-            sum = rightoperand.m_mark + mark;
+        if (int(rightoperand) >= 0 && int(rightoperand) <= 100 && mark >= 0 && mark <= 100) {
+            sum = int(rightoperand) + mark;
         }
         return sum;
     }
 
     //sum value
-    int operator+(const Mark& leftOperand, const Mark& rightOperand) {
-        int sum = 0;
-        if (leftOperand.m_mark && rightOperand.m_mark) {
-            sum = leftOperand.m_mark + rightOperand.m_mark;
+    Mark operator+(const Mark& leftOperand, const Mark& rightOperand) {
+        Mark sum = -1;
+        if (int(leftOperand)&& int(rightOperand)) {
+            sum = int(leftOperand) + int(rightOperand);
         }
         return sum;
     }
