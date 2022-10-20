@@ -124,7 +124,7 @@ namespace sdds {
         return aver;
     }
    
-    //Numbers& sort(bool ascending
+    //Numbers& sort(bool ascending)
     Numbers& Numbers::sort(bool ascending){
         if (ascending) {
             for (int i = 0; i < m_numCount; i++) {
@@ -147,8 +147,7 @@ namespace sdds {
                     }
                 }
             }
-        }
-        
+        }  
         return *this;
     }
 
@@ -156,7 +155,7 @@ namespace sdds {
     //This unary operator (that is incapable of modifying the current object) will return a descending sorted copy of 
     //the Numbers object.
     Numbers Numbers::operator-() const{
-        Numbers& sort();
+      
         return *this;
     }
 
