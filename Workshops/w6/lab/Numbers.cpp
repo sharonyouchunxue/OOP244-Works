@@ -1,3 +1,19 @@
+/*
+*****************************************************************************
+                        Workshop 6 - part 1
+Full Name  : Chunxue You(Sharon)
+Student ID#: 127632214
+Email      : cyou8@myseneca.ca
+Section    : OOP244 NAA
+Date       : 2022-10-19
+
+Authenticity Declaration:
+I declare this submission is the result of my own work and has not been
+shared with any other student or 3rd party content provider. I have done all
+the coding by myself and only copied the code that my professor provided to
+complete my workshops and assignments.
+*****************************************************************************
+*/
 #define _CRT_SECURE_NO_WARNINGS
 #include <cstring>
 #include <fstream>
@@ -110,7 +126,7 @@ namespace sdds {
    
     //Numbers& sort(bool ascending
     Numbers& Numbers::sort(bool ascending){
-        int i, j;
+          int i, j;
         double temp;
         for (i = m_numCount - 1; i > 0; i--) {
             for (j = 0; j < i; j++) {
@@ -133,8 +149,9 @@ namespace sdds {
     }
 
     //Unary plus operator ( +) (to be implemented by students)
-    //This unary operator (that is incapable of modifying the current object) will return an ascending sorted copy of 
-    //the Numbers object.
+    //This unary operator (that is incapable of modifying the current object) will return an ascending
+    //  sorted copy of the Numbers object.
+
     Numbers Numbers::operator+() const{
         return *this;
     }
@@ -143,33 +160,30 @@ namespace sdds {
     int Numbers::numberCount()const{
         int count{};
         char ch{};
-        ifstream f(m_filename);
-        if (f.is_open()) {
-            while (!f.eof()) {
-                ch = f.get();
-                if (ch == '\n') {
-                    count++;
-                }
+        ifstream f(m_filename); 
+        while (f) {
+            ch = f.get();
+            if (ch == '\n') {
+                count++;
             }
-        }
+        }    
         return count;
     }
 
     //load
     bool Numbers::load(){
         bool read = false;
-        double val = 0.0;
-        int i = 0;
+        int i{};
         if (m_numCount > 0) {
             m_numbers = new double[m_numCount];
             ifstream f(m_filename);
-            for (int i = 0; i < m_numCount && !f.eof(); i++) {
-                f >> val;
-                m_numbers[i] = val;
+            while (f && i < m_numCount) {
+                f >> m_numbers[i];
+                if (f) {
+                    i++;
+                    read = true;
+                }
             }
-        }
-        if (i == m_numCount) {
-            read = true;
         }
         return read;
     }
@@ -185,13 +199,13 @@ namespace sdds {
     }
     
    //Operatro += (to be implemented by students)
-    Numbers& Numbers::operator+=(double M) {
+    Numbers& Numbers::operator+=(const double M) {
         double* temp{};
         temp = new double[m_numCount + 1];
         for (int i = 0; i < m_numCount; i++) {
             temp[i] = m_numbers[i];
         }
-        temp[m_numCount] = M;
+        temp[m_numCount ] = M;
         m_numCount += 1;
         delete[] m_numbers;
         m_numbers = temp;
@@ -211,7 +225,7 @@ namespace sdds {
             }
             else {
                 ostr << "*** COPY ***" << endl;
-            
+            }
                 for (int i = 0; i < m_numCount; i++) {
                     ostr << m_numbers[i];
                     if (i != m_numCount - 1) {
@@ -219,8 +233,7 @@ namespace sdds {
                     }
                     else {
                         ostr << endl;
-                    }
-                }
+                    }          
             }
             ostr << "-------------------------" << endl;
             ostr << "Total of " << m_numCount << " number(s)" << endl;
