@@ -126,17 +126,29 @@ namespace sdds {
    
     //Numbers& sort(bool ascending
     Numbers& Numbers::sort(bool ascending){
-          int i, j;
-        double temp;
-        for (i = m_numCount - 1; i > 0; i--) {
-            for (j = 0; j < i; j++) {
-                if (m_numbers[j] > m_numbers[j + 1]) {
-                    temp = m_numbers[j];
-                    m_numbers[j] = m_numbers[j + 1];
-                    m_numbers[j + 1] = temp;
+        if (ascending) {
+            for (int i = 0; i < m_numCount; i++) {
+                for (int j = i + 1; j < m_numCount; j++) {
+                    if (m_numbers[i] > m_numbers[j]) {
+                        double temp = m_numbers[i];
+                        m_numbers[i] = m_numbers[j];
+                        m_numbers[j] = temp;
+                    }
                 }
             }
         }
+        else {  //descending
+            for (int i = 0; i < m_numCount; i++) {
+                for (int j = i + 1; j < m_numCount; j++) {
+                    if (m_numbers[i] < m_numbers[j]) {
+                        double temp = m_numbers[i];
+                        m_numbers[i] = m_numbers[j];
+                        m_numbers[j] = temp;
+                    }
+                }
+            }
+        }
+        
         return *this;
     }
 
@@ -144,7 +156,7 @@ namespace sdds {
     //This unary operator (that is incapable of modifying the current object) will return a descending sorted copy of 
     //the Numbers object.
     Numbers Numbers::operator-() const{
-        
+        Numbers& sort();
         return *this;
     }
 
@@ -153,10 +165,11 @@ namespace sdds {
     //  sorted copy of the Numbers object.
 
     Numbers Numbers::operator+() const{
+       
         return *this;
     }
 
-    //numberCount
+    //numberCount, read data from the file
     int Numbers::numberCount()const{
         int count{};
         char ch{};
@@ -188,7 +201,7 @@ namespace sdds {
         return read;
     }
 
-    //save
+    //save copy to output.txt 
     void Numbers::save(){
         if (m_isOriginal && !isEmpty()) {
             std::ofstream f(m_filename);
@@ -216,7 +229,7 @@ namespace sdds {
     //decimal point.
     ostream& Numbers::display(ostream& ostr) const {
         if (isEmpty()) {
-            cout << "Empty list" << endl;
+            cout << "Empty list";
         }
         else {
             ostr << "=========================" << endl;
