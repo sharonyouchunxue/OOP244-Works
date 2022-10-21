@@ -22,7 +22,7 @@ namespace sdds {
         double* m_numbers{};
         char* m_filename{};
         bool m_isOriginal;
-        int m_numCount;
+        int m_numCount{};
         bool isEmpty()const;
         void setEmpty();
         void deallocate();

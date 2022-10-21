@@ -13,7 +13,8 @@ shared with any other student or 3rd party content provider. I have done all
 the coding by myself and only copied the code that my professor provided to
 complete my workshops and assignments.
 *****************************************************************************
-*/#ifndef SDDS_BASKET_H_
+*/
+#ifndef SDDS_BASKET_H_
 #define SDDS_BASKET_H_
 
 namespace sdds {

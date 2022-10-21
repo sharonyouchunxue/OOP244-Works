@@ -16,6 +16,7 @@ complete my workshops and assignments.
 */
 #define _CRT_SECURE_NO_WARNINGS
 #include <cstring>
+#include<iostream>
 #include <fstream>
 #include "Numbers.h"
 using namespace std;
@@ -39,6 +40,7 @@ namespace sdds {
             setEmpty();
             m_isOriginal = false;
         }
+        
     }
     //Destructor
     Numbers::~Numbers() {
@@ -56,7 +58,8 @@ namespace sdds {
     //Copy Assignment Operator(to be implemented by students)
     Numbers& Numbers::operator=(const Numbers& I) {
         if (this != &I) {//if this is not a self-copy assignment
-            delete[] m_numbers;//double value
+            //delete[] m_numbers;//double value
+            deallocate();
             setEmpty();
             m_isOriginal = false;
             m_numbers = new double[I.m_numCount];
@@ -87,8 +90,9 @@ namespace sdds {
     }
     //setFilename
     void Numbers::setFilename(const char* filename) {
-        delete[] m_filename;
-        m_filename = new char[strlen(filename) + 1];
+        //delete[] m_filename;
+        deallocate();
+        m_filename = new char[strlen(filename)+1];
         strcpy(m_filename, filename);
     }
     //Returns the smallest double number in the list
@@ -154,9 +158,9 @@ namespace sdds {
     //Unary negation operator ( - ) (to be implemented by students)
     //This unary operator (that is incapable of modifying the current object) will return a descending sorted copy of 
     //the Numbers object.
-    Numbers Numbers::operator-() const{
-      
-        return *this;
+    Numbers Numbers::operator-() const{ 
+        Numbers temp(*this);
+        return temp.sort(false);
     }
 
     //Unary plus operator ( +) (to be implemented by students)
@@ -164,8 +168,8 @@ namespace sdds {
     //  sorted copy of the Numbers object.
 
     Numbers Numbers::operator+() const{
-       
-        return *this;
+        Numbers temp(*this);
+        return temp.sort(true);
     }
 
     //numberCount, read data from the file
@@ -190,7 +194,7 @@ namespace sdds {
             m_numbers = new double[m_numCount];
             ifstream f(m_filename);
             while (f && i < m_numCount) {
-                f >> m_numbers[i];
+                f >> m_numbers[i];   
                 if (f) {
                     i++;
                     read = true;
@@ -205,6 +209,8 @@ namespace sdds {
         if (m_isOriginal && !isEmpty()) {
             std::ofstream f(m_filename);
             for (int i = 0; i < m_numCount; i++) {
+                f.setf(ios::fixed);
+                f.precision(2);
                 f << m_numbers[i] << endl;
             }
         }
@@ -212,6 +218,7 @@ namespace sdds {
     
    //Operatro += (to be implemented by students)
     Numbers& Numbers::operator+=(const double M) {
+ 
         double* temp{};
         temp = new double[m_numCount + 1];
         for (int i = 0; i < m_numCount; i++) {
@@ -239,7 +246,10 @@ namespace sdds {
                 ostr << "*** COPY ***" << endl;
             }
                 for (int i = 0; i < m_numCount; i++) {
+                    ostr.setf(ios::fixed);
+                    ostr.precision(2);
                     ostr << m_numbers[i];
+                   
                     if (i != m_numCount - 1) {
                         ostr << ", ";
                     }
@@ -251,8 +261,9 @@ namespace sdds {
             ostr << "Total of " << m_numCount << " number(s)" << endl;
             ostr << "Largest number:  " << max() << endl;
             ostr << "Smallest number: " << min() << endl;
-            ostr << "Average :        " << average() << endl;
-            ostr << "========================="; cout << endl;
+            ostr << "Average:         " << average()<< endl;
+            ostr << "========================="; 
+            //ostr << endl;
         }
         return ostr;
     }
