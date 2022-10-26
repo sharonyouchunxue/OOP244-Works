@@ -5,7 +5,7 @@ numbers.txt
 Total of 8 number(s)
 Largest number:  333.20
 Smallest number: -5.00
-Average :        80.02
+Average:         80.02
 =========================
 =========================
 *** COPY ***
@@ -14,7 +14,7 @@ Average :        80.02
 Total of 8 number(s)
 Largest number:  333.20
 Smallest number: -5.00
-Average :        80.02
+Average:         80.02
 =========================
 =========================
 *** COPY ***
@@ -23,5 +23,5 @@ Average :        80.02
 Total of 8 number(s)
 Largest number:  333.20
 Smallest number: -5.00
-Average :        80.02
+Average:         80.02
 =========================

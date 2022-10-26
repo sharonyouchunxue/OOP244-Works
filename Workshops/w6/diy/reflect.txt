@@ -1,0 +1,40 @@
+Reflection - Workshop Six Classes and Resources
+
+In this workshop, the primary topics I worked through were classes and resources. A class can be considered as a blueprint for the data 
+structure, and member attributes and functions. Classes can have resources such as memory that an object allocates at run-time. The 
+additional logic required to manage this resource can be referred to as deep copying and deep assignment. The purpose of this workshop is 
+to implement copy constructor and copy assignment to prevent memory leaks and resize allocated memory.
+
+In part one of the workshop, I was tasked to complete the implementation of the “Numbers” class. This class reads several double values 
+from a file (one number per line) and holds them dynamically in memory. Then the caller application has the option of adding numbers to the 
+collection. I began by reviewing all the functions that are provided along with the instruction for each line by each line to understand 
+what the task is for. I then started to create the necessary prototypes within the class definition based on the instruction known as header 
+file. 
+
+I then started to write functions to copy constructor, assignment operator and += operator. First, I copied the Number object to the current 
+object. Second, I copied all the double values in the object to the newly allocated memory. I then increased the size of the allocated 
+memory by one, and then return the reference of the current object. The next step involved using c++ file handling to create instance of 
+ifstream to open and then read the file. I used dynamic memory allocation to hold the value in an array pointed by the content. If the 
+ifstream is not failed, then I can keep reading content from the file into the element of content dynamic array. I also utilized the 
+ofstream class to help create and write the data to the file obtained from the program’s output by creating the save () function. Finally, 
+I created the display function and couple helper function that will allow me to display the data into a tabular formatting, and also allow 
+me to overload the insertion operator and extraction operator to display and read the Number object using istream. 
+
+I was initially stuck on the sorting, using negation and positive operator overloading functions to display the descending and ascending 
+order for the value. I found these to be the most challenging functions for this workshop, and it took me about half day to understand the 
+logic and relationship to each other. I was accustomed to creating bubble sorting by either ascending or descending, but I was not sure 
+about using Boolean inside of the sorting function as an argument by using if else statement so that I could call the sort by true or 
+false to display the numbers of array by different order. I found this exercise to be very useful in that I learned something that I did 
+not know before. One more thing that I need to pay attention is to remember delete the memory that has been allocated, as I had one memory 
+leak while compiling on valgrind. I fixed the leak by walking through all my code where I created dynamic memory allocation.
+
+For the workshop part two DIY, I was tasked to design and code a class named “Basket” that holds information about a fruit basket. This 
+part of the workshop was nice and straight forward compared with the lab that I did. The only difference is in this DIY, we need to create 
+a struct that can hold a character name with 30 + 1 length and a double variable that can hold the quantity. With this we can use the 
+struct within the Basket Class definition that can point to the fruit type. I found the rest of the function to be the same as the lab, 
+but less functions that I needed to deal with. I found this workshop six to be a good way to review and practise the concepts that we 
+learned in the course material and lectures since beginning of this semester. The workshop incorporated many of the concepts I have 
+learned so far, such as modular programming, dynamic memory allocation, member function and privacy, constructor and destructor, operator 
+overloading and copy constructor, copy assignment, operator overloading and c++ file handling. By now the semester is halfway done, and I 
+value that I have learned many different programming concepts, as well as debugging techniques. 
+
