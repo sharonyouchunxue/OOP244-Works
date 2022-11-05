@@ -218,7 +218,7 @@ namespace sdds {
     
    //Operatro += (to be implemented by students)
     Numbers& Numbers::operator+=(const double M) {
- 
+
         double* temp{};
         temp = new double[m_numCount + 1];
         for (int i = 0; i < m_numCount; i++) {

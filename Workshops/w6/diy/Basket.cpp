@@ -87,7 +87,7 @@ namespace sdds {
         }
         return valid;
     }
-
+    //
     Basket& Basket::operator+=(Fruit& fruit) {
         Fruit* temp{};
         temp = new Fruit[m_size + 1];
@@ -100,7 +100,7 @@ namespace sdds {
         m_fruitType = temp;
         return *this;
     }
-
+    //display the data in formatting
     std::ostream& Basket::display(std::ostream& ostr) const{
         if (m_size == 0) {
             ostr << "The basket is empty!" << endl;

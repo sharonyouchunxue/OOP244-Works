@@ -41,7 +41,7 @@ namespace sdds
     {
         m_number = value;
     }
-
+    //check validate aprt number and balance, then assign the number and balance
     Apartment::Apartment(int number, double balance)
     {
         if (number >= 1000 && number <= 9999
@@ -51,6 +51,8 @@ namespace sdds
             m_balance = balance;
         }
     }
+
+    //display the value to console
     std::ostream& Apartment::display() const
     {
         if (*this)
@@ -73,6 +75,7 @@ namespace sdds
         return cout;
     }
 
+    //check validation
     Apartment::operator bool() const
     {
         bool valid = false;
@@ -81,6 +84,7 @@ namespace sdds
         }
         return valid;
     }
+
 
     Apartment::operator int() const
     {
@@ -138,7 +142,7 @@ namespace sdds
         }
         return *this;
     }
-
+    //left shift operator, shift aprt2 balance to aprt 1
     Apartment& Apartment::operator<<(Apartment& rightOperand){
         if (m_number > 0 && rightOperand.m_number > 0 && m_number != rightOperand.m_number)
         {
@@ -147,7 +151,7 @@ namespace sdds
         }
         return *this;
     }
-
+    //right shif operator, shift apartment1 balance to aprt2
     Apartment& Apartment::operator>>(Apartment& leftOperand) {
         if (m_number > 0 && leftOperand.m_number > 0 && this->m_number != leftOperand.m_number)
         {

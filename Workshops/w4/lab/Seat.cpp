@@ -107,6 +107,7 @@ Then it will return the reference of the current object for possible future use.
 		}
 		return res;
 	}
+	//default constructor
 	Seat::Seat() {
 		reset();
 	}
@@ -141,7 +142,7 @@ Then it will return the reference of the current object for possible future use.
 		}
 	}
 
-	/*Deallocates the memory pointed by the passenger name pointer attribute.*/
+	/* destructor. Deallocates the memory pointed by the passenger name pointer attribute.*/
 	Seat::~Seat() {
 		delete[] m_passengerName;
 		m_passengerName = nullptr;

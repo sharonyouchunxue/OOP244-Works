@@ -47,8 +47,7 @@ namespace sdds
         Mark& operator=(const int value); 
         Mark& operator+=(const int rightOperand);
         Mark& operator-=(const int rightOperand);
-        Mark operator+(const int rightOperand)const;
-        
+        Mark operator+(const int rightOperand)const;     
     };
     int operator+=(int& value, const Mark& rightOperand);
     int operator-=(int& value, const Mark& rightOperand);
