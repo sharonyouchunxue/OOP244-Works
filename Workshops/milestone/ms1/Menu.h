@@ -26,7 +26,7 @@ namespace sdds {
     private:
         friend class Menu; //menuItem is the friend owned by Menu
         char* m_menuItem; //maximum length of 50
-        MenuItem()= default;
+        MenuItem() = default;
         MenuItem(const char* item = nullptr);
         ~MenuItem();
         //MenuItem can not get copied or assigned to another MenuItem. 
@@ -34,7 +34,7 @@ namespace sdds {
         MenuItem(const MenuItem&) = delete;
         void operator=(const MenuItem&) = delete;
         void set(const char* item);
-        std::ostream& display(std::ostream& ostr = std::cout)const;    
+        std::ostream& display(std::ostream& ostr = std::cout)const;
     };
 
     class Menu {
@@ -44,10 +44,10 @@ namespace sdds {
         int m_numItems;
         int indentation;
     public:
-        Menu()= default;
+        Menu() = default;
         Menu(const char* title, int indenValue = 0);
-        Menu(const Menu& menu);
-        Menu& operator=(const Menu& menu);
+        Menu(const Menu&) = delete;            //MenuItem can not get copied or assigned to another MenuItem. 
+        Menu& operator=(const Menu&) = delete;                                      //This, must be enforced in your code
         void setTitle(const char* title);
         void setMenuItems(MenuItem* const Items[], int num);
         void setIndentation(int indenValue);
@@ -63,8 +63,5 @@ namespace sdds {
         void clear();
         void deallocate();
     };
-    
-   
-
 }
 #endif // !

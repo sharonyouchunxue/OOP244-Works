@@ -105,28 +105,7 @@ namespace sdds {
             clear();     
         }   
     }
-
     //3.Copy and Assignment
-    Menu::Menu(const Menu& menu) {
-        setTitle(menu.m_title);
-        setMenuItems(menu.MenuItems, menu.m_numItems);
-        setIndentation(menu.indentation);       
-    }
-
-    Menu& Menu::operator=(const Menu& menu) {
-        if (this != &menu) {
-            //delete[] m_title;
-            deallocate();
-            for (int i = 0; i < m_numItems; i++) {
-                delete MenuItems[i];
-                MenuItems[i] = nullptr;
-            }
-            setTitle(menu.m_title);
-            setMenuItems(menu.MenuItems, menu.m_numItems);
-            setIndentation(menu.indentation);
-        }
-        return *this;
-    }
 
     //clear
     void Menu::clear() {
