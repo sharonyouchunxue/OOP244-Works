@@ -1,11 +1,18 @@
 /*
 *****************************************************************************
                         Milestone 2
-Full Name  : Chunxue You(Sharon)
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
-Date       : 2022-11-07
+Filename: Parking.cpp
+Version 1.0
+Full Name  : Chunxue You(Sharon)
+Revision History
+----------------------------------------------------------------
+Date      Reason
+2020/11/08  Preliminary release
+2020/11/09  Added a printHeader() function to load the dash frame
+-----------------------------------------------------------------
 
 Authenticity Declaration:
 I declare this submission is the result of my own work and has not been

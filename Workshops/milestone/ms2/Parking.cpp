@@ -1,11 +1,18 @@
 /*
 *****************************************************************************
                         Milestone 2
-Full Name  : Chunxue You(Sharon)
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
-Date       : 2022-11-07
+Filename: Parking.cpp
+Version 1.0
+Full Name  : Chunxue You(Sharon)
+Revision History
+----------------------------------------------------------------
+Date      Reason
+2020/11/08  Preliminary release
+2020/11/09  Added a printHeader() function to load the dash frame
+-----------------------------------------------------------------
 
 Authenticity Declaration:
 I declare this submission is the result of my own work and has not been
@@ -59,6 +66,28 @@ namespace sdds {
         }
     }
 
+    void Parking::printHeader(const char* title)const {
+        char oldFill = cout.fill('-');
+        cout.width(33);
+        cout << ""<< endl;
+        cout << title << endl;
+        cout.fill('-');
+        cout.width(33);
+        cout << "" << endl << endl;
+        cout.fill(oldFill);
+    }
+
+    void Parking::printHeaderWithFilename(const char* filename) const{
+        char oldFill = cout.fill('-');
+        cout.width(33);
+        cout << "" << endl;
+        cout << filename << m_filename << endl;
+        cout.fill('-');
+        cout.width(33);
+        cout << "" << endl << endl;
+        cout.fill(oldFill);
+    }
+
     //isEmpty function that returns true if the Parking is in an invalid empty State or false if the 
     //parking is valid and usable
     bool Parking::isEmpty() const {
@@ -68,7 +97,7 @@ namespace sdds {
     //does not receive or return anything and at this stage only prints:
     //******Valet Parking****** <NEWLINE>
     void Parking::parkingStatus() const {
-        cout << "******Valet Parking******" << endl;
+        cout << "****** Valet Parking ******" << endl;
        
     }
 
@@ -78,38 +107,26 @@ namespace sdds {
     void Parking::parkVehicle() const {
         int selection = m_vSelectionMenu.run();
         if (selection == 1) {
-            cout << "---------------------------------" << endl;
-            cout << "Parking Car" << endl;
-            cout << "---------------------------------\n" << endl;
+            printHeader("Parking Car");
         }
         else if (selection == 2) {
-            cout << "---------------------------------" << endl;
-            cout << "Parking Motorcycle" << endl;
-            cout << "---------------------------------\n" << endl;
+            printHeader("Parking Motorcycle");
         }
         else {
-            cout << "---------------------------------" << endl;
-            cout << "Canclled parking" << endl;
-            cout << "---------------------------------\n" << endl;
+            printHeader("Cancelled parking");
         }
     }
     //This function does not receive or return anything and only prints the corresponding message
     void Parking::returnVehicle() const {
-        cout << "---------------------------------" << endl;
-        cout << "Returning Vehicle" << endl;
-        cout << "---------------------------------\n" << endl;
+        printHeader("Returning Vehicle");
     }
 
     void Parking::listParkedVehicles() const {
-        cout << "---------------------------------" << endl;
-        cout << "Listing Parked Vehicles" << endl;
-        cout << "---------------------------------\n" << endl;
+        printHeader("Listing Parked Vehicles");
     }
 
     void Parking::findVehicle() const {
-        cout << "---------------------------------" << endl;
-        cout << "Finding a Vehicle" << endl;
-        cout << "---------------------------------\n" << endl;
+        printHeader("Finding a Vehicle");
     }
 
     /*This function does not receive anything and returns a Boolean.
@@ -170,10 +187,8 @@ namespace sdds {
     //If the Parking is in an invalid empty state, return false (and print nothing).
     bool Parking::loadDateFile() const {
         bool valid = false;
-        if (!isEmpty()) {
-            cout << "---------------------------------" << endl;
-            cout << "loading data from" << m_filename << endl;
-            cout << "---------------------------------\n" << endl;
+        if (!isEmpty()) { 
+            printHeaderWithFilename("loading data from ");
             valid = true;
         }
         return valid;
@@ -183,9 +198,7 @@ namespace sdds {
     //state it prints: "Saving data into " then prints the name of the data file followed by a <NEWLINE>.
     void Parking::saveDataFile() const {
         if (!isEmpty()) {
-            cout << "---------------------------------" << endl;
-            cout << "Saving data into" << m_filename << endl;
-            cout << "---------------------------------\n" << endl;
+            printHeaderWithFilename("Saving data into ");
         }
     }
 
@@ -216,7 +229,7 @@ namespace sdds {
                     break;
                 case 5:
                     if (closeParking()) {
-                        cout << "Ending application!\n" << endl;
+                        cout << "Ending application!" << endl;
                         valid = 0;
                     };
                     break;
