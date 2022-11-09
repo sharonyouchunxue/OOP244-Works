@@ -45,7 +45,6 @@ namespace sdds {
         Parking(const Parking&) = delete;
         Parking& operator=(const Parking&) = delete;
         void setFileName(const char* filename);
-        void printDash();
         ~Parking();
     };
 }
