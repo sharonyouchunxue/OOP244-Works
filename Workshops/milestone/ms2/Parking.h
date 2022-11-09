@@ -19,7 +19,7 @@ complete my workshops and assignments.
 #include "Menu.h"
 namespace sdds {
 
-    class Parking : public Menu {
+    class Parking {
         char* m_filename{};//Parking holds a C-style string with an unknown size to hold the data path and file name of the application
         Menu m_parkingMenu;
         Menu m_vSelectionMenu;
@@ -35,7 +35,6 @@ namespace sdds {
         void saveDataFile()const;   
         
     public:
-        using Menu::Menu;
         int run();
         //constructor
         Parking() = default;
