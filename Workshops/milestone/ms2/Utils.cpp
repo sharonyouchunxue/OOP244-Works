@@ -11,7 +11,7 @@ Revision History
 ----------------------------------------------------------------
 Date      Reason
 2020/11/08  Preliminary release
-2020/11/09  Added a printHeader() function to load the dash frame
+2020/11/09  Added printHeader function to load the dash frame format
 -----------------------------------------------------------------
 
 Authenticity Declaration:
