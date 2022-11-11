@@ -12,19 +12,23 @@ namespace sdds
 		VehicleBasic::NewAddress(currentCargo);
 	}
 
+	//function to get value of capacity from the private class
 	double Dumper::getCapacity()const{
 		return m_capacity;
 	}
 
+	//function to get value of current cargo load from the private class
 	double Dumper::getCurrCargoLoad() const{
 		return m_currCargoLoad;
 	}
 
+	//copy m_capacity value to temperory argument capacity
 	void Dumper::setCapacity(double capacity){
 		m_capacity = capacity;
 
 	}
 
+	//copy m_currCargoLoad value to temperory argument cargo
 	void Dumper::setCargo(double cargo){
 		m_currCargoLoad = cargo;
 	}
@@ -40,6 +44,9 @@ namespace sdds
 		return res;
 	}
 
+	//a mutator that unloads current cargo (sets the attribute to 0). 
+	//If the current load has been changed, return true, otherwise, return false. 
+	//** the mutator will not do anything if the current cargo is 0 and thus return false **
 	bool Dumper::unloadCargo(){
 		bool res = false;
 		if (m_currCargoLoad > 0) {
@@ -49,11 +56,13 @@ namespace sdds
 		return res;
 	}
 
+	//inserts into os the content of the object in the format 
 	std::ostream& Dumper::write(std::ostream& os)const{
 		cout << "| " << getYear() << " | " << getLicenseNum() << " | " << getAddress() << " | " << getCurrCargoLoad() << "/" << getCapacity();
 		return os;
 	}
 
+	//a mutator that reads from the stream in the data for the current object 
 	std::istream& Dumper::read(std::istream& in){
 		int tempYear;
 		char tempLicenseNum[9];
@@ -71,24 +80,26 @@ namespace sdds
 		setLocation(tempLocation);
 		cout << "Capacity: ";
 		cin >> tempCapacity;
-		//tempCapacity = m_capacity;
 		setCapacity(tempCapacity);
 		cout << "Cargo: ";
 		cin >> tempCargo;
-		//tempCargo = m_currCargoLoad;
 		setCargo(tempCargo);
 
 		return in;		
 	}
 
+    //destructor
 	Dumper::~Dumper(){
 	}
 
-
+    //helper function to overload insertion operator to insert a Dumper into a stream
+    //this operator will call write member function  in the class Dumper
 	std::ostream& operator<<(std::ostream& os, const Dumper& D){
 		return D.write(os);
 	}
 
+    //overload extraction operator to extract a Dumper into a stream
+	//this operator will call read member function  in the class Dumper
 	std::istream& operator>>(std::istream& istr, Dumper& D){
 		return D.read(istr);
 	}
