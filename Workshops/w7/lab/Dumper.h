@@ -27,7 +27,5 @@ namespace sdds
 	//helper function
 	std::ostream& operator<<(std::ostream& os, const Dumper& D);
 	std::istream& operator>>(std::istream& istr, Dumper& D);
-
-
 }
 #endif

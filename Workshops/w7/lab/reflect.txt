@@ -1,0 +1,42 @@
+Reflection – Workshop Seven – Derived Classes
+
+In this workshop, the primary topic I worked through is derived classes. Through my reading, I discovered that a derived class is a class 
+that is inherited from an existing class. The derived class inherits all members and member functions of the base class. The derived class 
+can have more functionality than the base class, but it can easily access the base class. A derived class can also be referred to a child 
+class or subclass.
+
+In this workshop, I was tasked to work with classes that make up the hierarchical structure. The base or parent class will be a 
+“VehicleBasic” that holds common attributes of a vehicle with an engine. The child class is “Dumper” and will be derived from the parent 
+class. In addition to this hierarchy, we defined custom input/output operators for these classes. 
+
+I started with the VehicleBasic module. In this module, I created a class with private members and public members that will work with the 
+tester coding in order to complete the task. Based on the straightforward instruction, I can finish most of the function smoothly. Then I 
+created a dumper module as the inheritance from the base module. In this function, it took me a while to understand the relationship with 
+the base module, especially how to inherit from the VehicleBasic module. I then solved it by reviewing the course notes and course recording video. The code to declare inheritance is to create a Dumper class with the code showing below: 
+Class Dumper: public VehicleBasic{}
+
+After declaring the necessary member function, the program ran smoothly based on the clear instructions. However, I ended up getting stuck 
+on the boolean function to load the cargo, as well as on the last test function to input the capacity for Vehicle 4 information. For the 
+boolean load cargo function, my logic was originally only to check if the cargo is greater than zero and current carload within the max 
+capacity. Inside of the if loop, I wrote current cargo is equal to cargo, result is equal to true. I solved this logical error by walking 
+through the program and breaking the point to analyze the logic. For the display Vehicle 4 information function, the function is supposed 
+to save the input data of 7000, then display the capacity as 7000 at the end instead of previous value 5432. I was also using walk through
+ and breaking point method to find out the issue, by then I created a setCapacity function to copy the m_capacity to capacity so that when
+ the user inputs value, it will set the value same as the user input.
+
+The most recent milestone project that I completed is the milestone part 1. This project is about creating a valet parking application. 
+The milestone part 1 is to develop a user interface which is the menu system. In the milestone part 1, I was tasked to create a menu 
+module that contains menu class and menu item class, the MenuItem is owned by the menu class. Both classes can not get copied or assigned 
+to another MenuItem and menu. For this part, the most challenging piece for me was how to design the program so it can meet the 
+requirement to match the output. In particular, determining the member function we need in the class, and also how to use the class 
+information in another class. In this part, I struggled on menu add function because I mixed up the relationship between MenuItem and menu. 
+I fixed my logic by checking the number of items less than maximum menu item. Within the if statement I created a dynamic memory 
+allocation for the MenuItem class so that my program was running properly. I had used multiple dynamic memory allocation, and I was lost 
+in how many times I should delete the memory that I created. I was stuck on the memory leak for almost the whole day. I finally solved it 
+by walking through my code a few times to calculate how many times I did dynamic memory allocation. Then I found out after dynamically 
+allocating the memory, the program went to clear function, and I realized I did not delete the memory, but only set all data as a empty 
+state. To solve this I created an deallocate function and then called this function inside of the clear function.
+
+In conclusion, found this assignment very informative in how I apply derived classes, and I gained useful knowledge in solving bugs 
+related dynamic memory allocation.
+

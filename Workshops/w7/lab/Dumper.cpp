@@ -34,7 +34,7 @@ namespace sdds
 	}
 
 	//check if the crago plus current cargo load weight within the capacity range
-	//if it is in the range, the add the cargo by 1, result is equal to true otherwise return false;
+	//if it is in the range, then add the cargo by 1, result is equal to true otherwise return false;
 	bool Dumper::loaddCargo(double cargo){
 		bool res = false;
 		if (cargo + m_currCargoLoad <= m_capacity) {

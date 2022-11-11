@@ -40,7 +40,7 @@ namespace sdds
 		strcpy(m_address, address);
 		cout.unsetf(ios::right);
 		cout.setf(ios::left);
-		cout.width(23);
+		cout.width(20);
 		cout << m_address << "|" << endl;
 		cout.unsetf(ios::left);
 	}
