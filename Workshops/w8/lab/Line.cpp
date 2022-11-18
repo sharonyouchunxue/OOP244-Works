@@ -14,6 +14,7 @@ complete my workshops and assignments.
 *****************************************************************************
 */
 #include <iostream>
+#include <cstring>
 #include "Line.h"
 
 using namespace std;
@@ -49,8 +50,9 @@ namespace sdds {
     //overrides the draw function of the base clas
     std::ostream& Line::draw(std::ostream& ostr)const{
         if (m_length > 0 && LblShape::label()) {
-            ostr << label();
-            ostr.width(m_length);
+            ostr << LblShape::label();
+            int length = m_length - strlen(LblShape::label());
+            ostr.width(length);
             ostr.fill('=');
             ostr << '=';
         }

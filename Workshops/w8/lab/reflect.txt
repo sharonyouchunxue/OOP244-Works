@@ -1,0 +1,31 @@
+Reflection Workshop Eight - Virtual Functions and Abstract Base Classes
+
+In this workshop, we looked at the polymorphic concepts of virtual functions and abstract base classes. Through my reading, I discovered 
+that virtual functions is member function which is declared within a base class, and then can be overridden by a derived class. A virtual 
+member function is called through a reference or a pointer to a base-class type in C++ and then dynamic binding happens. It is important 
+to always define virtual functions due to not knowing which version of a function is called until run time. An abstract base class is a 
+class that is designed to be used as a base class and contains one pure virtual function. We declare it by setting zero in the declaration 
+of a virtual member function in the class declaration.
+
+For this workshop, I was tasked with creating a hierarchy of classes to implement four modules for Shape, LblShape, Line and Rectangle 
+classes in order to understand the role of virtual functions in inheritance.
+
+I began with the Shape module to create shape class with the necessary member functions, including the two pure virtual functions, which 
+are draw and getSpecs. I set the pure virtual functions to zero. Then I followed the instructions to create the LblShape abstract class 
+that can inherit an abstract class from the interface of Shape module, and this class is designed to add a label to a shape with all the 
+necessary member functions. The next step was to create the Line module which is a concrete class that will inherit the LblShape class to 
+create a horizontal line with a label. The last module I created is Rectangle, with the rectangle concrete class to inherit the LblShape 
+class to create a frame with a label inside. I gained valuable knowledge learning about virtual function and abstract base class and putting
+ some of it into practice. I learned how to create and define pure virtual function. I also learned how to use virtual function between 
+base class and derived class, which will allow a new derived object to use the function without overloading. 
+
+The most recent milestone project that I completed is the ms2. This project involved creating a parking module to provide the user all the 
+options needed for managing the valet parking without actually doing anything. This part of the project was a little bit easier than ms1 
+because I did not need to use many dynamic memory allocations so that reduced memory leak issues. However, I was still stuck on how to 
+access the Menu module to display the parking menu list since the constructor and assignment operator were set delete in case the 
+menuItem is being copied. I solved this issue by calling the three set function from the menu module, and then I called the extraction 
+operator to display the parking menu items. 
+
+In conclusion, inheritance, derived classes, virtual functions and abstract base classes are important concepts in C++, however they are 
+very practical skills for a programmer.
+
