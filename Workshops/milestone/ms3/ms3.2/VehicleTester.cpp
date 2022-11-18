@@ -8,8 +8,6 @@ Revision History
 -----------------------------------------------------------
 Date      Reason
 -----------------------------------------------------------*/
-
-
 #include <iostream>
 #include "Vehicle.h"
 using namespace std;
