@@ -17,6 +17,7 @@ complete my workshops and assignments.
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>
+#include <cctype>
 #include "Vehicle.h"
 using namespace std;
 namespace sdds {
@@ -28,12 +29,16 @@ namespace sdds {
     const char* Vehicle::getMakeModel() const {
         return m_makeModel;
     }
-    /* Vehicle::Vehicle(){
-         setEmpty();
-     }*/
+    char Vehicle::toupper(char* ch)const{
+        for (int i = 0; i < (strlen(ch) + 1); i++) {
+            if (ch[i] >= 'a' && ch[i] <= 'z') ch[i] += ('A' - 'a');
+            }
+        return *ch;
+    }
+
     Vehicle::~Vehicle() {
-        delete[] m_makeModel;
-        m_makeModel = nullptr;
+        //delete[] m_makeModel;
+        //m_makeModel = nullptr;
     }
     //three argument constructor
     Vehicle::Vehicle(const char* licensePlate, const char* makeModel) {
@@ -41,6 +46,7 @@ namespace sdds {
         if (licensePlate != nullptr && licensePlate[0] != '\0' && makeModel != nullptr && makeModel[0] != '\0') {
             if (strlen(licensePlate) < 9 && strlen(makeModel) > 1 && strlen(makeModel) < 61) {
                 strcpy(m_licensePlate, licensePlate);
+                toupper(m_licensePlate);
                 m_makeModel = new char[strlen(makeModel) + 1];
                 strcpy(m_makeModel, makeModel);
                 m_parkingLotNum = 0;
@@ -83,12 +89,14 @@ namespace sdds {
     int Vehicle::getParkingSpot() const {
         return m_parkingLotNum;
     }
+ 
     //Resets the parking spot number to a new value. If the value is invalid, it will set the vehicle to an Invalid empty state.
     void Vehicle::setParkingSpot(const int parkingSpotNum) {
         if (parkingSpotNum > 0) {
             m_parkingLotNum = parkingSpotNum;
         }
         else {
+            delete[] m_makeModel;
             setEmpty();
         }
     }
@@ -102,7 +110,7 @@ namespace sdds {
     bool Vehicle::operator==(const char* licensePlate) const {
         bool identical = false;
         if (licensePlate != nullptr && licensePlate[0] != '\0' && strlen(licensePlate) <= MAX_CHARACTERS) {
-            if (strcmp(m_licensePlate, licensePlate));
+            if (strcmp(m_licensePlate, licensePlate))
             identical = true;
         }
         return identical;
@@ -124,7 +132,7 @@ namespace sdds {
             istr >> m_parkingLotNum;
             istr.ignore();
             istr.getline(m_licensePlate, MAX_CHARACTERS + 1, ',');
-
+            toupper(m_licensePlate);
             istr.getline(temp, 61, ',');
             setMakeModel(temp);
         }
@@ -136,6 +144,7 @@ namespace sdds {
                 cout << "Invalid Licence Plate, try again: ";
                 istr >> m_licensePlate;
             }
+            toupper(m_licensePlate);
             cout << "Enter Make and Model: ";
             istr >> temp;
             if (strlen(temp) < 2 || strlen(temp) > 60) {
@@ -143,6 +152,7 @@ namespace sdds {
                 istr >> temp;
             }
             setMakeModel(temp);
+
             m_parkingLotNum = 0;
         }
         if (istr.fail()) {

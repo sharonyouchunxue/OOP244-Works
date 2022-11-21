@@ -32,6 +32,7 @@ namespace sdds {
         const char* getMakeModel()const;
 
     public:
+        char toupper(char* ch)const;
         Vehicle() = default;
         virtual ~Vehicle();
         Vehicle(const char* licensePlate, const char* makeModel);

@@ -19,7 +19,6 @@ complete my workshops and assignments.
 
 #include "ReadWritable.h"
 #include "Utils.h"
-
 namespace sdds {
     const int MAX_CHARACTERS = 8;
 
@@ -28,30 +27,28 @@ namespace sdds {
         char* m_makeModel{};
         int m_parkingLotNum{};
     protected:
-        const char* getLicensePlate()const;
-        const char* getMakeModel()const;
-
-    public:
-        Vehicle() = default;
-        virtual ~Vehicle();
-        Vehicle(const char* licensePlate, const char* makeModel);
-        //rule of three
-        Vehicle(const Vehicle&) = default;
-        Vehicle& operator=(const Vehicle&) = delete;
         void setEmpty();
         bool isEmpty()const;
+        const char* getLicensePlate()const;
+        const char* getMakeModel()const;
         void setMakeModel(const char* makeModel);
-        int getParkingSpot()const;
+           
+    public:
+        char toupper(char* ch)const;
+        Vehicle();
+        Vehicle(const char* licensePlate, const char* makeModel);
+        //rule of three
+        Vehicle(const Vehicle& V);
+        Vehicle& operator=(const Vehicle& V);
+        int getParkingSpot()const; 
         void setParkingSpot(const int parkingSpotNum);
         bool operator==(const char* licensePlate)const;
         bool operator==(const Vehicle& vehicle)const;
         std::istream& read(std::istream& istr = std::cin);
         virtual std::ostream& writeType(std::ostream& ostr = std::cout)const = 0;
         std::ostream& write(std::ostream& ostr = std::cout)const;
-
+         ~Vehicle();
     };
-
-
 }
 
 #endif // !SDDS_VEHICLE_H__
