@@ -1,11 +1,11 @@
 /*
 *****************************************************************************
-                        Milestone 3
+                        Milestone 4
 Full Name  : Chunxue You(Sharon)
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
-Date       : 2022-11-17
+Date       : 2022-11-21
 
 Authenticity Declaration:
 I declare this submission is the result of my own work and has not been
@@ -51,10 +51,8 @@ namespace sdds {
         if (licensePlate != nullptr && licensePlate[0] != '\0' && makeModel != nullptr && makeModel[0] != '\0') {
             if (strlen(licensePlate) < 9 && strlen(makeModel) > 1 && strlen(makeModel) < 61) {
                 strcpy(m_licensePlate, licensePlate);
-                //toupper(m_licensePlate);
                 setMakeModel(makeModel);
                 m_parkingLotNum = 0;
-                //delete[] m_makeModel;
             }
         }
     }
@@ -136,7 +134,7 @@ namespace sdds {
     //This comparison is NOT case-sensitive.If any value is invalid, this function returns false;
     bool Vehicle::operator==(const Vehicle& vehicle) const {
         bool identical = false;
-        if (strcmp(m_licensePlate, vehicle.m_licensePlate)){
+        if (strcmp(m_licensePlate, vehicle.m_licensePlate)) {
             identical = true;
         }
         return identical;
@@ -151,13 +149,14 @@ namespace sdds {
                 istr.getline(m_licensePlate, MAX_CHARACTERS + 1, ',');
                 toupper(m_licensePlate);
                 istr.getline(makeModel, 61, ',');
+                setMakeModel(makeModel);
             }
             else {
-                cout << "Enter Licence Plate Number : ";
+                cout << "Enter License Plate Number: ";
                 istr >> m_licensePlate;
                 istr.ignore();
                 if (strlen(m_licensePlate) > 8) {
-                    cout << "Invalid Licence Plate, try again: ";
+                    cout << "Invalid License Plate, try again: ";
                     istr >> m_licensePlate;
                 }
                 toupper(m_licensePlate);
@@ -178,15 +177,13 @@ namespace sdds {
         return istr;
     }
 
-
     std::ostream& Vehicle::write(std::ostream& ostr) const {
         if (isEmpty()) {
             ostr << "Invalid Vehicle Object" << endl;
         }
         else {
-
+            writeType();
             if (isCsv()) {
-                writeType();
                 ostr << m_parkingLotNum << "," << m_licensePlate << "," << m_makeModel << ",";
             }
             else {

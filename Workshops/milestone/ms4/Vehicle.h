@@ -1,11 +1,11 @@
 /*
 *****************************************************************************
-                        Milestone 3
+                        Milestone 4
 Full Name  : Chunxue You(Sharon)
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
-Date       : 2022-11-17
+Date       : 2022-11-21
 
 Authenticity Declaration:
 I declare this submission is the result of my own work and has not been
@@ -19,7 +19,6 @@ complete my workshops and assignments.
 
 #include "ReadWritable.h"
 #include "Utils.h"
-
 namespace sdds {
     const int MAX_CHARACTERS = 8;
 
@@ -33,10 +32,10 @@ namespace sdds {
         const char* getLicensePlate()const;
         const char* getMakeModel()const;
         void setMakeModel(const char* makeModel);
+
     public:
         char toupper(char* ch)const;
         Vehicle();
-        virtual ~Vehicle();
         Vehicle(const char* licensePlate, const char* makeModel);
         //rule of three
         Vehicle(const Vehicle& V);
@@ -48,10 +47,8 @@ namespace sdds {
         std::istream& read(std::istream& istr = std::cin);
         virtual std::ostream& writeType(std::ostream& ostr = std::cout)const = 0;
         std::ostream& write(std::ostream& ostr = std::cout)const;
-
+        ~Vehicle();
     };
-
-
 }
 
 #endif // !SDDS_VEHICLE_H__

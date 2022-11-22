@@ -36,11 +36,11 @@ namespace sdds {
         return *ch;
     }
 
-    Vehicle::Vehicle(){
+    Vehicle::Vehicle() {
         setEmpty();
     }
 
-    Vehicle::~Vehicle(){
+    Vehicle::~Vehicle() {
         delete[] m_makeModel;
         m_makeModel = nullptr;
     }
@@ -51,29 +51,27 @@ namespace sdds {
         if (licensePlate != nullptr && licensePlate[0] != '\0' && makeModel != nullptr && makeModel[0] != '\0') {
             if (strlen(licensePlate) < 9 && strlen(makeModel) > 1 && strlen(makeModel) < 61) {
                 strcpy(m_licensePlate, licensePlate);
-                toupper(m_licensePlate);
                 setMakeModel(makeModel);
                 m_parkingLotNum = 0;
-                delete[] m_makeModel;
+                //delete[] m_makeModel;
             }
-        } 
+        }
     }
 
-    Vehicle::Vehicle(const Vehicle& V){
+    Vehicle::Vehicle(const Vehicle& V) {
         setEmpty();
         *this = V;
     };
-    
-    Vehicle& Vehicle::operator=(const Vehicle& V){
+
+    Vehicle& Vehicle::operator=(const Vehicle& V) {
         if (this != &V) {
-            if (V.m_makeModel != nullptr) {
-                delete[] m_makeModel;
-                setMakeModel(V.m_makeModel);
-             /*   m_makeModel = new char[strlen(V.m_makeModel) + 1];
-                strcpy(m_makeModel, V.m_makeModel);*/
+            if (V.m_licensePlate != nullptr) {
+                strcpy(m_licensePlate, V.m_licensePlate);
             }
-            strcpy(m_licensePlate, V.m_licensePlate);
             m_parkingLotNum = V.m_parkingLotNum;
+            setMakeModel(V.m_makeModel);
+            /*   m_makeModel = new char[strlen(V.m_makeModel) + 1];
+               strcpy(m_makeModel, V.m_makeModel);*/
         }
         return *this;
     }
@@ -88,15 +86,15 @@ namespace sdds {
 
     //returns true if the Vehicle is in an invalid empty state, or else, it returns false
     bool Vehicle::isEmpty()const {
-        return m_licensePlate[0] == '\0' && m_makeModel == nullptr&& m_parkingLotNum == 0;
+        return m_licensePlate[0] == '\0' && m_makeModel == nullptr && m_parkingLotNum == 0;
     }
 
     //This function resets the make and model of the Vehicle to a new value. 
     //If the new value is null or empty, the object is set to an invalid empty state. 
     //Public Member function and operator overload implementations:
     void Vehicle::setMakeModel(const char* makeModel) {
+        delete[] m_makeModel;
         if (makeModel != nullptr && makeModel[0] != '\0') {
-            delete[] m_makeModel;
             m_makeModel = new char[strlen(makeModel) + 1];
             strcpy(m_makeModel, makeModel);
         }
@@ -126,7 +124,7 @@ namespace sdds {
 
     bool Vehicle::operator==(const char* licensePlate) const {
         bool identical = false;
-        if (licensePlate != nullptr && licensePlate[0] != '\0'&&strlen(licensePlate) <= MAX_CHARACTERS) {
+        if (licensePlate != nullptr && licensePlate[0] != '\0' && strlen(licensePlate) <= MAX_CHARACTERS) {
             if (strcmp(m_licensePlate, licensePlate))
                 identical = true;
         }
@@ -137,7 +135,7 @@ namespace sdds {
     //This comparison is NOT case-sensitive.If any value is invalid, this function returns false;
     bool Vehicle::operator==(const Vehicle& vehicle) const {
         bool identical = false;
-        if (strcmp(m_licensePlate, vehicle.m_licensePlate) == 0) {
+        if (strcmp(m_licensePlate, vehicle.m_licensePlate)) {
             identical = true;
         }
         return identical;
@@ -152,13 +150,14 @@ namespace sdds {
                 istr.getline(m_licensePlate, MAX_CHARACTERS + 1, ',');
                 toupper(m_licensePlate);
                 istr.getline(makeModel, 61, ',');
+                setMakeModel(makeModel);
             }
             else {
-                cout << "Enter Licence Plate Number : ";
+                cout << "Enter License Plate Number: ";
                 istr >> m_licensePlate;
                 istr.ignore();
                 if (strlen(m_licensePlate) > 8) {
-                    cout << "Invalid Licence Plate, try again: ";
+                    cout << "Invalid License Plate, try again: ";
                     istr >> m_licensePlate;
                 }
                 toupper(m_licensePlate);
@@ -169,7 +168,7 @@ namespace sdds {
                     istr >> makeModel;
                 }
                 setMakeModel(makeModel);
-                m_parkingLotNum = 0;          
+                m_parkingLotNum = 0;
             }
         }
         else {
@@ -185,9 +184,8 @@ namespace sdds {
             ostr << "Invalid Vehicle Object" << endl;
         }
         else {
-            
-            if (isCsv()) {
-                writeType();
+            writeType();
+            if (isCsv()) {  
                 ostr << m_parkingLotNum << "," << m_licensePlate << "," << m_makeModel << ",";
             }
             else {
