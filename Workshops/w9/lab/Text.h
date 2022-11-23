@@ -17,14 +17,17 @@ complete my workshops and assignments.
 #ifndef SDDS_TEXT_H__
 #define SDDS_TEXT_H__
 #include <iostream>
+#include "Text.h"
 
 namespace sdds {
+
     class Text {
         char* m_content{};
     protected:
         const char& operator[](int index)const;
     public:
-        Text(const char* file = nullptr);
+        Text();
+        Text(const char* file);
         //rule of three
         Text(const Text& T);
         Text& operator=(const Text& T); 
@@ -33,7 +36,7 @@ namespace sdds {
         //write
         virtual std::ostream& write(std::ostream& ostr = std::cout)const; 
         unsigned getFileLength(std::istream& is);
-        ~Text();
+        virtual ~Text();
     };
     //helper function
     std::ostream& operator<<(std::ostream& ostr, const Text& RW);

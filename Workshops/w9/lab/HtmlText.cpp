@@ -4,9 +4,11 @@
 #include "HtmlText.h"
 using namespace std;
 namespace sdds {
-
+	HtmlText::HtmlText(){
+		m_title = nullptr;
+	}
 	//two argument constructor
-	HtmlText::HtmlText(const char* file, const char* title ):Text(file) {
+	HtmlText::HtmlText(const char* title) {
 		if (title) {
 			m_title = new char[strlen(title) + 1];
 			strcpy(m_title, title);
@@ -14,37 +16,41 @@ namespace sdds {
 	}
 	//copy constructor
 	HtmlText::HtmlText(const HtmlText& HT){
-		*this = HT;
+		operator = (HT);
 	}
 	//assignment constructor
-	HtmlText& HtmlText::operator=(const HtmlText& HT){
-		if (this != &HT){
+	HtmlText& HtmlText::operator=(const HtmlText& HT) {
+		if (this != &HT) {
+			Text::operator=(HT);
 			if (HT.m_title) {
+				delete[] m_title;
 				m_title = new char[strlen(HT.m_title) + 1];
+				strcpy(m_title, HT.m_title);
 			}
 		}
 		return *this;
 	}
 
-	HtmlText::~HtmlText(){
+	HtmlText::~HtmlText() {
 		delete[] m_title;
 		m_title = nullptr;
 	}
 
-	std::ostream& HtmlText::write(std::ostream& ostr) const{
+	std::ostream& HtmlText::write(std::ostream& ostr) const {
+		Text::write(ostr);
 		bool MS = false;
+		int i = 0;
 		ostr << "<html><head><title>";
-		if (m_title != NULL) {
+		if (m_title != nullptr) {
 			ostr << m_title;
 		}
 		else {
 			ostr << "No Title";
 		}
 		ostr << "</title></head>\n<body>\n";
-		if (m_title != NULL) {
+		if (m_title != nullptr) {
 			ostr << "<h1>" << m_title << "</h1>\n";
 		}
-		int i = 0;
 		while (this->operator[](i) != '\0') {
 			const char ch = this->operator[](i);
 			if (ch == ' ') {
@@ -77,18 +83,6 @@ namespace sdds {
 		ostr << "</body>\n</html>";
 		return ostr;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

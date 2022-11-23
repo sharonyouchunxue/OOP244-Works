@@ -21,6 +21,16 @@ complete my workshops and assignments.
 #include "Text.h"
 using namespace std;
 namespace sdds {
+    Text::Text(){
+        m_content = nullptr;
+    }
+    // one argument constructor
+    Text::Text(const char* file) {
+        delete[] m_content;
+        m_content = new char[strlen(file) + 1];
+        strcpy(m_content, file);
+    }
+
     //This index operator provides read-only access to the content of the text for the derived classes of Text.
     //The behaviour of the operator is not defined if the index goes out of bounds or if the content is null.
     const char& Text::operator[](int index) const {
@@ -43,19 +53,26 @@ namespace sdds {
     }
 
     std::istream& Text::read(std::istream& istr){
-        char content[30]{};
-        istr >> content;
         delete[] m_content;
-        m_content = new char[strlen(content) + 1];
-        strcpy(m_content, content);
-        if (m_content != nullptr) {
-            istr.ignore();
+        if (istr) {
+            int len = getFileLength(istr);
+            m_content = new char[len + 1]{};
+            for (int i = 0; i < len; i++) {
+                if(!istr.fail()){
+                    istr.get(m_content[i]);
+                    istr.clear();
+                }
+                else {
+                    istr.ignore(10000, '\n');
+                }
+                
+            }
         }
         return istr;
     }
 
     std::ostream& Text::write(std::ostream& ostr) const{
-        if (m_content) {
+        if (m_content!=nullptr) {
             ostr << m_content;
         }
         return ostr;
@@ -82,11 +99,6 @@ namespace sdds {
         m_content = nullptr;
     }
  
-    Text::Text(const char* file) {
-        delete[] m_content;
-            m_content = new char[strlen(file) + 1];
-            strcpy(m_content, file);
-        }
     std::ostream& operator<<(std::ostream& ostr, const Text& RW){
         return RW.write(ostr);
     }

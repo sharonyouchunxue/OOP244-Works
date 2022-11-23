@@ -35,7 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt" />
-    <Text Include="dcwr.txt" />
     <Text Include="dcwrLittle.txt" />
+    <Text Include="dcwr.txt" />
   </ItemGroup>
 </Project>

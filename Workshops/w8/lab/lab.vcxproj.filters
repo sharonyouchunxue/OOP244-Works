@@ -47,5 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\Desktop\OOP-Workshops-main\WS08\lab\ws8data.csv" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
