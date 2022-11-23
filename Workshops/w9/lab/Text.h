@@ -27,7 +27,7 @@ namespace sdds {
         const char& operator[](int index)const;
     public:
         Text();
-        Text(const char* file);
+        Text(const char* content);
         //rule of three
         Text(const Text& T);
         Text& operator=(const Text& T); 

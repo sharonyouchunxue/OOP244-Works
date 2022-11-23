@@ -15,8 +15,9 @@ namespace sdds {
 		}
 	}
 	//copy constructor
-	HtmlText::HtmlText(const HtmlText& HT){
-		operator = (HT);
+	HtmlText::HtmlText(const HtmlText& HT):Text(HT) {
+		m_title = new char[strlen(HT.m_title) + 1];
+		strcpy(m_title, HT.m_title);
 	}
 	//assignment constructor
 	HtmlText& HtmlText::operator=(const HtmlText& HT) {
@@ -24,7 +25,7 @@ namespace sdds {
 			Text::operator=(HT);
 			if (HT.m_title) {
 				delete[] m_title;
-				m_title = new char[strlen(HT.m_title) + 1];
+				m_title = new char[strlen(HT.m_title) + 1]{};
 				strcpy(m_title, HT.m_title);
 			}
 		}
@@ -52,7 +53,7 @@ namespace sdds {
 			ostr << "<h1>" << m_title << "</h1>\n";
 		}
 		while (this->operator[](i) != '\0') {
-			const char ch = this->operator[](i);
+			char ch = this->operator[](i);
 			if (ch == ' ') {
 				if (MS) {
 					ostr << "&nbsp;";

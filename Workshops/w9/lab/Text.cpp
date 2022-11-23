@@ -25,10 +25,16 @@ namespace sdds {
         m_content = nullptr;
     }
     // one argument constructor
-    Text::Text(const char* file) {
+    Text::Text(const char* content) {
         delete[] m_content;
-        m_content = new char[strlen(file) + 1];
-        strcpy(m_content, file);
+        if (content) {
+            m_content = new char[strlen(content) + 1];
+            strcpy(m_content, content);
+        }
+        else {
+            delete[] m_content;
+            m_content = nullptr;
+        }
     }
 
     //This index operator provides read-only access to the content of the text for the derived classes of Text.
@@ -64,12 +70,35 @@ namespace sdds {
                 }
                 else {
                     istr.ignore(10000, '\n');
-                }
-                
+                }          
             }
         }
         return istr;
     }
+
+    /*
+    bool stopReading = false;
+        int i = 0;
+        char temp{};
+        int len = getFileLength(in);
+        delete[] m_content;
+        m_content = nullptr;
+        m_content = new char[len + 1]{};
+        while (!stopReading)
+        {
+            in.get(temp);
+            if (!in.fail()) {
+                m_content[i] = temp;
+                i++;
+                in.clear();
+            }
+            else{
+                in.ignore(1000, '\n');
+                stopReading = true;
+            }
+        }
+        return in;
+    */
 
     std::ostream& Text::write(std::ostream& ostr) const{
         if (m_content!=nullptr) {
