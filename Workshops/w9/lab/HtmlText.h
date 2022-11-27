@@ -10,10 +10,11 @@ namespace sdds {
 		//rule of three
 		HtmlText(const HtmlText& HT);
 		HtmlText& operator=(const HtmlText& HT);
-		virtual ~HtmlText(); 
+		~HtmlText(); 
 		//Text::write override
 		std::ostream& write(std::ostream& ostr)const;
 	};
+	
 }
 
 #endif

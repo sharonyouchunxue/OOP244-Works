@@ -5,7 +5,7 @@ Full Name  : Chunxue You(Sharon)
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
-Date       : 2022-11-21
+Date       : 2022-11-26
 
 Authenticity Declaration:
 I declare this submission is the result of my own work and has not been
@@ -17,7 +17,9 @@ complete my workshops and assignments.
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>
+#include <string>
 #include "Vehicle.h"
+#include "Utils.h"
 using namespace std;
 namespace sdds {
     //This function returns a read-only address of the license plate of the Vehicle.
@@ -52,6 +54,7 @@ namespace sdds {
             if (strlen(licensePlate) < 9 && strlen(makeModel) > 1 && strlen(makeModel) < 61) {
                 strcpy(m_licensePlate, licensePlate);
                 setMakeModel(makeModel);
+
                 m_parkingLotNum = 0;
             }
         }
@@ -69,8 +72,6 @@ namespace sdds {
             }
             m_parkingLotNum = V.m_parkingLotNum;
             setMakeModel(V.m_makeModel);
-            /*   m_makeModel = new char[strlen(V.m_makeModel) + 1];
-               strcpy(m_makeModel, V.m_makeModel);*/
         }
         return *this;
     }
@@ -85,7 +86,7 @@ namespace sdds {
 
     //returns true if the Vehicle is in an invalid empty state, or else, it returns false
     bool Vehicle::isEmpty()const {
-        return m_licensePlate[0] == '\0' && m_makeModel == nullptr && m_parkingLotNum == 0;
+        return m_licensePlate[0] == '\0' && m_makeModel == nullptr&& m_parkingLotNum == 0;
     }
 
     //This function resets the make and model of the Vehicle to a new value. 
@@ -93,6 +94,7 @@ namespace sdds {
     //Public Member function and operator overload implementations:
     void Vehicle::setMakeModel(const char* makeModel) {
         delete[] m_makeModel;
+        //string str = makeModel;
         if (makeModel != nullptr && makeModel[0] != '\0') {
             m_makeModel = new char[strlen(makeModel) + 1];
             strcpy(m_makeModel, makeModel);
@@ -143,13 +145,13 @@ namespace sdds {
     std::istream& Vehicle::read(std::istream& istr) {
         char makeModel[61]{};
         if (!(istr.fail())) {
-            if (isCsv()) {
+            if (isCsv()){
                 istr >> m_parkingLotNum;
                 istr.ignore();
                 istr.getline(m_licensePlate, MAX_CHARACTERS + 1, ',');
                 toupper(m_licensePlate);
                 istr.getline(makeModel, 61, ',');
-                setMakeModel(makeModel);
+                setMakeModel(makeModel);           
             }
             else {
                 cout << "Enter License Plate Number: ";
@@ -161,8 +163,9 @@ namespace sdds {
                 }
                 toupper(m_licensePlate);
                 cout << "Enter Make and Model: ";
-                istr >> makeModel;
-                if (strlen(makeModel) < 2 || strlen(makeModel) > 60) {
+                //istr >> makeModel;
+                istr.getline(makeModel,61);
+                if (strlen(makeModel) < 2 || strlen(makeModel) > 60){
                     cout << "Invalid Make and model, try again: ";
                     istr >> makeModel;
                 }

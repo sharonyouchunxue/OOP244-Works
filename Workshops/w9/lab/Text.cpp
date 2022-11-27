@@ -57,48 +57,25 @@ namespace sdds {
             }
         return *this;
     }
-
-    std::istream& Text::read(std::istream& istr){
+    //read contend from the resourses by calling getFileLength
+    std::istream& Text::read(std::istream& istr) {
         delete[] m_content;
         if (istr) {
             int len = getFileLength(istr);
             m_content = new char[len + 1]{};
             for (int i = 0; i < len; i++) {
-                if(!istr.fail()){
+                if (!istr.fail()) {
                     istr.get(m_content[i]);
                     istr.clear();
                 }
                 else {
                     istr.ignore(10000, '\n');
-                }          
+                    istr.clear();
+                }
             }
         }
         return istr;
     }
-
-    /*
-    bool stopReading = false;
-        int i = 0;
-        char temp{};
-        int len = getFileLength(in);
-        delete[] m_content;
-        m_content = nullptr;
-        m_content = new char[len + 1]{};
-        while (!stopReading)
-        {
-            in.get(temp);
-            if (!in.fail()) {
-                m_content[i] = temp;
-                i++;
-                in.clear();
-            }
-            else{
-                in.ignore(1000, '\n');
-                stopReading = true;
-            }
-        }
-        return in;
-    */
 
     std::ostream& Text::write(std::ostream& ostr) const{
         if (m_content!=nullptr) {

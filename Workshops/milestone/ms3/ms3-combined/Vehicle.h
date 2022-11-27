@@ -47,7 +47,7 @@ namespace sdds {
         std::istream& read(std::istream& istr = std::cin);
         virtual std::ostream& writeType(std::ostream& ostr = std::cout)const = 0;
         std::ostream& write(std::ostream& ostr = std::cout)const;
-         ~Vehicle();
+        ~Vehicle();
     };
 }
 

@@ -4,7 +4,8 @@
 #include "HtmlText.h"
 using namespace std;
 namespace sdds {
-	HtmlText::HtmlText(){
+	//default constructor
+	HtmlText::HtmlText() {
 		m_title = nullptr;
 	}
 	//two argument constructor
@@ -15,10 +16,11 @@ namespace sdds {
 		}
 	}
 	//copy constructor
-	HtmlText::HtmlText(const HtmlText& HT):Text(HT) {
+	HtmlText::HtmlText(const HtmlText& HT) :Text(HT) {
 		m_title = new char[strlen(HT.m_title) + 1];
 		strcpy(m_title, HT.m_title);
 	}
+
 	//assignment constructor
 	HtmlText& HtmlText::operator=(const HtmlText& HT) {
 		if (this != &HT) {
@@ -32,58 +34,61 @@ namespace sdds {
 		return *this;
 	}
 
+	//destructor
 	HtmlText::~HtmlText() {
 		delete[] m_title;
 		m_title = nullptr;
 	}
 
+	//write ovverride function from the parent class
 	std::ostream& HtmlText::write(std::ostream& ostr) const {
-		Text::write(ostr);
 		bool MS = false;
-		int i = 0;
+		const HtmlText& HT = *this;
+		int i;
 		ostr << "<html><head><title>";
 		if (m_title != nullptr) {
 			ostr << m_title;
 		}
 		else {
-			ostr << "No Title";
+			ostr << "No No Title";
 		}
 		ostr << "</title></head>\n<body>\n";
 		if (m_title != nullptr) {
 			ostr << "<h1>" << m_title << "</h1>\n";
 		}
-		while (this->operator[](i) != '\0') {
-			char ch = this->operator[](i);
-			if (ch == ' ') {
-				if (MS) {
-					ostr << "&nbsp;";
-				}
+		for (i = 0; HT[i]; i++) {
+			switch (HT[i])
+			{
+			case ' ':
+				if (MS) ostr << "&nbsp;";
 				else {
 					MS = true;
 					ostr << ' ';
 				}
-			}
-			else if (ch == '<') {
-				MS = false;
+				break;
+			case'<':
 				ostr << "&lt;";
-			}
-			else if (ch == '>') {
 				MS = false;
+				break;
+			case'>':
 				ostr << "&gt;";
-			}
-			else if (ch == '\n') {
 				MS = false;
+				break;
+			case'\n':
 				ostr << "<br />\n";
-			}
-			else {
 				MS = false;
-				ostr << ch;
+				break;
+			default:
+				ostr << HT[i];
+				MS = false;
+				break;
 			}
-			i++;
 		}
 		ostr << "</body>\n</html>";
 		return ostr;
 	}
-
 }
+
+
+
 

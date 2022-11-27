@@ -17,19 +17,21 @@ complete my workshops and assignments.
 #ifndef SDDS_MOTORCYCLE_H__
 #define SDDS_MOTORCYCLE_H__
 #include "Vehicle.h"
+#include "Car.h"
 namespace sdds {
     class Motorcycle: public Vehicle{
-        bool m_sidecar;
+        bool m_sidecar{};
     public:
         Motorcycle();
         Motorcycle(const char* licensePlate, const char* makeModel);
         //rule of three, should be safely copied and assigned to another
         Motorcycle(const Motorcycle& M);
+        bool isValid()const;
         Motorcycle& operator=(const Motorcycle& M);
         std::ostream& writeType(std::ostream& ostr = std::cout)const;
         std::istream& read(std::istream& istr = std::cin);
         std::ostream& write(std::ostream& ostr = std::cout)const;
-        ~Motorcycle();
+        virtual ~Motorcycle();
 
 
     };

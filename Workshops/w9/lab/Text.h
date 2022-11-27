@@ -36,7 +36,7 @@ namespace sdds {
         //write
         virtual std::ostream& write(std::ostream& ostr = std::cout)const; 
         unsigned getFileLength(std::istream& is);
-        virtual ~Text();
+        ~Text();
     };
     //helper function
     std::ostream& operator<<(std::ostream& ostr, const Text& RW);

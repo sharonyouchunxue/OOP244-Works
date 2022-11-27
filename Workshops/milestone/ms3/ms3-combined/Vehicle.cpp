@@ -70,8 +70,6 @@ namespace sdds {
             }
             m_parkingLotNum = V.m_parkingLotNum;
             setMakeModel(V.m_makeModel);
-            /*   m_makeModel = new char[strlen(V.m_makeModel) + 1];
-               strcpy(m_makeModel, V.m_makeModel);*/
         }
         return *this;
     }

@@ -1,0 +1,35 @@
+Reflection – Workshop Nine – Derived Classes and Resources
+
+In this workshop, we looked at derived classes and resources. Derived classes come from the base class, while inheriting all of the members 
+and member functions from the base. Resources refers to memory that is a resource to the class. 
+
+For this workshop, I was tasked to complete Text and HtmlText class. The Text class can read the contents of a text file into memory and 
+insert it into ostream. The HtmalText class has a title and can insert the text contents of the class into ostream in simple HTML format.
+
+I began with creating all the classes and member functions within the class definition based on the instructions. Creating the code for the 
+Text class as a base class was straight forward except for the read istream function. While I was able to successfully display 8 characters 
+with the test.txt file, the istream read function did not read the other txt file because it was much more than 8 characters. I solved this 
+by first walking through my code and also checking on the course notes. I then created the for loop to loop through all the characters from 
+the txt file and calling the getFileLength function so that it can read all of the content char by char from the resources, which is the txt
+ file from both classes. For the HtmlText file, I found it similar with base class however, I was stuck on the copy assignment operator, as 
+it deleted the m_content. I solved this by reviewing the course notes again for this week, and then I realized I was missing 
+Text::operator=(HT) in my copy assignment operator for child class. I learned that fully understanding the concept can help prevent getting 
+stuck on small errors.
+
+The most recent milestone project that I completed is milestone three. Milestone three involves continuing with the overall project. We 
+started with an abstract base class to make our future Car and Motorcycle classes read/writable. For the 3.1 read/writable module, it was 
+straight forward for me since I became familiarized with the concept in workshop seven. The most challenging part was the Vehicle module, 
+as I had a few problems with this module. First, I was not sure if the copy constructor and copy assignment constructor should be able to 
+copied to another object or if we should set them as delete. With some trial and error, I confirmed that I was supposed to copy to another
+ object. The second issue that I encountered was how to set the value for the user input for the read istream. I solved this issue by 
+calling setMakeModel instead of creating a dynamic memory allocation again since I already created it in the setMakeModel function. An 
+issue which caused me to be stuck for some time occurred when I compiled my code and my program aborted at the end. It took me almost two 
+days to understand the problem. I noticed the compiler wouldn’t allow me to delete the memory for m_makeModel in the destructor, and I 
+couldn’t understand. After walk through again and again, I found out for some reason I delete the memory for m_makeModel in my two 
+argument constructor, which it shouldn’t have been. The errors went away after I removed the deletion of the m_makeModel.
+
+In conclusion, inheritance is very important in object oriented programming. Computer programming professions must fully understand the 
+hierarchy between parent and child to ensure a successful project.
+
+
+
