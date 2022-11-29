@@ -56,7 +56,7 @@ namespace sdds {
         return istr;
     }
 
-    //overrides the draw function of the base clas
+    //overrides the draw function of the base class
     std::ostream& Rectangle::draw(std::ostream& ostr)const{
         if (m_width > 0 && m_height > 0) {
             //print first line
