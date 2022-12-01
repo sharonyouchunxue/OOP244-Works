@@ -19,32 +19,38 @@ complete my workshops and assignments.
 #include "Menu.h"
 #include "Car.h"
 #include "Motorcycle.h"
+#include "Utils.h"
+#include "Vehicle.h"
+
+
 namespace sdds {
+  
     //Maximum Number of Parking Spots and initialize it to the value 100.
     const int MAX_PARKINGSPOT = 100;
-
-    class Parking {
+    class Parking: public Menu{
         char* m_filename{};//Parking holds a C-style string with an unknown size to hold the data path and file name of the application
         Menu m_parkingMenu;
         Menu m_vSelectionMenu;
-        int m_numOfSpot{}; //Number of Spots:
+        int m_numOfSpot{}; //Number of Spots: always less than Max_parking spot
         Vehicle* parkingSpot[MAX_PARKINGSPOT]{}; //Parking Spots:
-        int m_numOfparkingVehicles{0};//Number of Parked Vehicles
+        int m_numOfparkedVehicles{};//Number of Parked Vehicles,always less than Max parking spot
+        void setEmpty();
+        bool isValid()const;
         bool isEmpty()const;
         void parkingStatus()const;
-        void parkVehicle()const;
-        void returnVehicle()const;
+        void parkVehicle();
+        void returnVehicle();
         void listParkedVehicles()const;
-        void findVehicle()const;
-        bool closeParking()const;
+        void findVehicle();
+        bool closeParking();
         bool exitParkingApp()const;
-        bool loadDateFile()const;
+        bool loadDataFile();
         void saveDataFile()const;
 
     public:
-        int run();
+        using Menu::Menu;
         //constructor
-        Parking() = default;
+        Parking();        
         //constructor modified
         Parking(const char* datafile, int noOfSpots);
         //Copy and assignment are denied in the Parking class. (Parking class can not be copied or 
@@ -52,8 +58,8 @@ namespace sdds {
         Parking(const Parking&) = delete;
         Parking& operator=(const Parking&) = delete;
         void setFileName(const char* filename);
-        void printHeader(const char* title)const;
-        void printHeaderWithFilename(const char* filename) const;
+        int run();
+        void pause()const;
         ~Parking();
     };
 }

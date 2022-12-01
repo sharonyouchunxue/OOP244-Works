@@ -1,0 +1,30 @@
+Reflection for Workshop Ten - Function Templates
+
+In this workshop, we looked at function templates. Function templates serve as way to create a generic type-specific versions of a function.
+ 
+For this workshop, I was tasked with completing a function template to search through a compound type array and insert the matches found in 
+the array, and into a collection of the same compound type.
+
+I began by reviewing and understanding all the code that provided in the instructions. Based on the assignment requirements, I created a 
+template that can take two TypeName in it. The search function took four arguments. Within the function there is an array of object and a 
+collection reference of same objects in the array, and we can use same typename. A Cstring key value to search was not compatible, so I 
+used a different name for it. I created a for loop to loop through all the elements in the array. I then called the “==” operator so that 
+if the element of array is == key value, then it will call the template function “add” in the collection template class, and if found set 
+to true, otherwise if it is not found, found set to false.
+
+The most recent milestone project that I completed is milestone four. In the milestone four, I was tasked to continue with the project to 
+inherit a Car and a Motorcycle class from the Vehicle class before the final stage of development of this project. These two modules are 
+almost the same logic based on the instructions. The parts that I struggled with is how to convert the boolean carwash and has sidecar, and 
+print them to the console with the integer value. I originally created the validation code for Carwash inside of the read function, but I 
+could not make that related to the boolean value. I solved this by creating a separate function “bool isValid”, and I put all the validation
+ logic inside of this function. I then assigned the boolean variable carwash is equal to the isValid function, and then it converted the 
+value as expected. The other part that I was stuck on is the format for after the test to assign the value to the comma in the separated 
+way. I the solved the this by using the debugging tool and walked through the code. I added a code in the copy assignment operator to 
+access the Readwritable class to setCSV to true. 
+
+In this week workshop, I learned that using a function template can help reduce redundancy of the code. By using templates, I can pass 
+different type of object into a function that performs the same logic. 
+
+
+
+

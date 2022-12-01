@@ -64,8 +64,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ParkingData.csv">
-      <Filter>Source Files</Filter>
-    </None>
+    <None Include="ParkingData.csv.bak" />
+    <None Include="ParkingData.csv" />
   </ItemGroup>
 </Project>
