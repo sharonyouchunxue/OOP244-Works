@@ -196,10 +196,10 @@ namespace sdds {
                     found = false;
                 }
             }
-            else {
-                cout << "\nLicense plate " << licensePlate << " Not found\n" << endl;
-                pause();
-            }
+        }
+        if (found) {
+            cout << "\nLicense plate " << licensePlate << " Not found\n" << endl;
+            pause();
         }
     }
              
@@ -248,6 +248,8 @@ namespace sdds {
                     found = false;                
                 }
             }
+        }
+        if (found) {
             cout << "\nLicense plate " << licensePlate << " Not found\n" << endl;
             pause();
         }
