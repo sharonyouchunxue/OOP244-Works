@@ -132,6 +132,14 @@ namespace sdds {
         }
         return identical;
     }
+    /* bool Vehicle::operator==(const char* licensePlate) const {
+        bool identical = false;
+        if (licensePlate != nullptr && licensePlate[0] != '\0' && strlen(licensePlate) <= MAX_CHARACTERS) {
+            if (strcmp(m_licensePlate, licensePlate))
+                identical = true;
+        }
+        return identical;
+    }*/
        
     //Compares two Vehicles and if they have the same license plate, it will return true, or else it returns false. 
     //This comparison is NOT case-sensitive.If any value is invalid, this function returns false;
