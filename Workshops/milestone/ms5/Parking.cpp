@@ -165,7 +165,7 @@ namespace sdds {
     }
     //need to be fix
     //This function does not receive or return anything and only prints the corresponding message
-    void Parking::returnVehicle() {
+    void Parking::returnVehicle(){
         char licensePlate[MAX_CHARACTERS + 1]{};
         bool invalid;
         cout << "Return Vehicle" << endl;
@@ -228,13 +228,12 @@ namespace sdds {
             if (strlen(licensePlate) < 1 || strlen(licensePlate) > 8) {
                 cout << "Invalid Licence Plate, try again: ";
                 invalid = true;
-            }
-            else {
-                for (int i = 0; i < strlen(licensePlate); i++) {
-                    licensePlate[i] = toupper(licensePlate[i]);
-                }
-            }
+            } 
         } while (invalid);
+        for (int i = 0; i < strlen(licensePlate); i++) {
+            licensePlate[i] = toupper(licensePlate[i]);
+        }
+
         bool found = true;
         for (int i = 0; i < m_numOfSpot && found; i++) {
             if (parkingSpot[i] != nullptr) {
