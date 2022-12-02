@@ -128,6 +128,7 @@ namespace sdds {
         if (!this->isEmpty() && licensePlate != nullptr && licensePlate[0] != '\0' && strlen(licensePlate) <= MAX_CHARACTERS) {
             if (this->m_licensePlate == licensePlate) {
                 identical = true;
+               
             }         
         }
         return identical;

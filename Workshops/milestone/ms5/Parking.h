@@ -21,13 +21,11 @@ complete my workshops and assignments.
 #include "Motorcycle.h"
 #include "Utils.h"
 #include "Vehicle.h"
-
-
 namespace sdds {
   
     //Maximum Number of Parking Spots and initialize it to the value 100.
     const int MAX_PARKINGSPOT = 100;
-    class Parking: public Menu{
+    class Parking:public Menu{
         char* m_filename{};//Parking holds a C-style string with an unknown size to hold the data path and file name of the application
         Menu m_parkingMenu;
         Menu m_vSelectionMenu;

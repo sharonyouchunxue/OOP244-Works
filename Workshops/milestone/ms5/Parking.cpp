@@ -21,6 +21,7 @@ complete my workshops and assignments.
 #include <string>
 #include "Utils.h"
 #include "Parking.h"
+#include "Vehicle.h"
 using namespace std;
 
 namespace sdds {
@@ -177,33 +178,29 @@ namespace sdds {
                 cout << "Invalid Licence Plate, try again: ";
                 invalid = true;
             }
-           /* else {
-                for (int i = 0; i < strlen(licensePlate); i++) {
-                    licensePlate[i] = toupper(licensePlate[i]);
-                 }
-               }*/
-            } while (invalid);
-            for (int i = 0; i < strlen(licensePlate); i++) {
-                licensePlate[i] = toupper(licensePlate[i]);
-            }
+        } while (invalid);
+        for (int i = 0; i < strlen(licensePlate); i++) {
+            licensePlate[i] = toupper(licensePlate[i]);
+        }
 
-            bool found = true;
-            for (int i = 0; i < m_numOfSpot && found; i++) {
-                if (*parkingSpot[i] == licensePlate){
+        bool found = true;
+        for (int i = 0; i < m_numOfSpot && found; i++) {
+            if (parkingSpot[i] != nullptr){
+                if (*parkingSpot[i] == licensePlate) {
                     cout << endl << "Returning: " << endl;
                     parkingSpot[i]->setCsv(false);
-                    cout << *parkingSpot[i] << endl;
+                    cout << parkingSpot[i]<< endl;
                     delete parkingSpot[i];
                     parkingSpot[i] = nullptr;
                     m_numOfparkedVehicles--;
                     found = false;
                 }
             }
-            if (found) {
+            else {
                 cout << "\nLicense plate " << licensePlate << " Not found\n" << endl;
                 pause();
             }
-
+        }
     }
              
     //oes not receive or return anything and goes through all the Parking Spot elements of the Parking 
@@ -239,21 +236,21 @@ namespace sdds {
             }
         } while (invalid);
         bool found = true;
-        for (int i = 0; i < m_numOfSpot; i++) {
-            if (found)
-                
-            if (*parkingSpot[i] == licensePlate) {
-                cout << "\nVechicle found: " << endl;
-                parkingSpot[i]->setCsv(false);
-                cout << *parkingSpot[i] << endl;
-                delete parkingSpot[i];
-                parkingSpot[i] = nullptr;
-                m_numOfparkedVehicles--;
-                found = false;
+        for (int i = 0; i < m_numOfSpot && found; i++) {
+            if (parkingSpot[i] != nullptr) {
+                if (*parkingSpot[i] == licensePlate) {
+                    cout << "Vechicle found: " << endl;
+                    parkingSpot[i]->setCsv(false);
+                    cout << parkingSpot[i] << endl;
+                    delete parkingSpot[i];
+                    parkingSpot[i] = nullptr;
+                    m_numOfparkedVehicles--;
+                    found = false;                
+                }
             }
+            cout << "\nLicense plate " << licensePlate << " Not found\n" << endl;
+            pause();
         }
-                cout << "\nLicense plate " << licensePlate << " Not found\n" << endl;
-                pause();   
     }
     /*This function does not receive anything and returns a Boolean.
      Follow the instruction in the Close Parking (End of day) menu selection and then return true,
