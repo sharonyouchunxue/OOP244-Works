@@ -86,7 +86,7 @@ namespace sdds {
 
     //returns true if the Vehicle is in an invalid empty state, or else, it returns false
     bool Vehicle::isEmpty()const {
-        return m_licensePlate[0] == '\0' && m_makeModel == nullptr && m_parkingLotNum == 0;
+        return m_licensePlate[0] == '\0'&& m_makeModel == nullptr && m_parkingLotNum == 0;
     }
 
     //This function resets the make and model of the Vehicle to a new value. 
@@ -125,13 +125,14 @@ namespace sdds {
 
     bool Vehicle::operator==(const char* licensePlate) const {
         bool identical = false;
-        if (licensePlate != nullptr && licensePlate[0] != '\0' && strlen(licensePlate) <= MAX_CHARACTERS) {
-            if (strcmp(m_licensePlate, licensePlate))
+        if (!this->isEmpty() && licensePlate != nullptr && licensePlate[0] != '\0' && strlen(licensePlate) <= MAX_CHARACTERS) {
+            if (this->m_licensePlate == licensePlate) {
                 identical = true;
+            }         
         }
         return identical;
     }
-
+       
     //Compares two Vehicles and if they have the same license plate, it will return true, or else it returns false. 
     //This comparison is NOT case-sensitive.If any value is invalid, this function returns false;
     bool Vehicle::operator==(const Vehicle& vehicle) const {
@@ -203,6 +204,7 @@ namespace sdds {
         }
         return ostr;
     }
+
 
 }
 

@@ -18,6 +18,7 @@ complete my workshops and assignments.
 #include <fstream>
 #include <iostream>
 #include <cstring>
+#include <string>
 #include "Utils.h"
 #include "Parking.h"
 using namespace std;
@@ -176,16 +177,19 @@ namespace sdds {
                 cout << "Invalid Licence Plate, try again: ";
                 invalid = true;
             }
-            else {
+           /* else {
                 for (int i = 0; i < strlen(licensePlate); i++) {
                     licensePlate[i] = toupper(licensePlate[i]);
                  }
-               }
+               }*/
             } while (invalid);
+            for (int i = 0; i < strlen(licensePlate); i++) {
+                licensePlate[i] = toupper(licensePlate[i]);
+            }
 
             bool found = true;
-            for (int i = 0; i < m_numOfSpot && found != true; i++) {
-                if (*parkingSpot[i] == licensePlate) {
+            for (int i = 0; i < m_numOfSpot && found; i++) {
+                if (*parkingSpot[i] == licensePlate){
                     cout << endl << "Returning: " << endl;
                     parkingSpot[i]->setCsv(false);
                     cout << *parkingSpot[i] << endl;
@@ -195,8 +199,10 @@ namespace sdds {
                     found = false;
                 }
             }
+            if (found) {
                 cout << "\nLicense plate " << licensePlate << " Not found\n" << endl;
                 pause();
+            }
 
     }
              
@@ -209,7 +215,6 @@ namespace sdds {
                 parkingSpot[i]->setCsv(false);
                 cout << *parkingSpot[i];
                 cout << "-------------------------------" << endl;
-                pause();
             }
         }
     }
@@ -234,8 +239,9 @@ namespace sdds {
             }
         } while (invalid);
         bool found = true;
-        for (int i = 0; i < m_numOfSpot && parkingSpot!=nullptr; i++) {
-            if(found)
+        for (int i = 0; i < m_numOfSpot; i++) {
+            if (found)
+                
             if (*parkingSpot[i] == licensePlate) {
                 cout << "\nVechicle found: " << endl;
                 parkingSpot[i]->setCsv(false);
@@ -309,7 +315,7 @@ namespace sdds {
     //If the Parking is not in an invalid empty state, Print the following : "loading data from " 
     //and then print the name of the data file followed by a <NEWLINE> and finally return true.
     //If the Parking is in an invalid empty state, return false (and print nothing).
-    bool Parking::loadDataFile(){
+    bool Parking::loadDataFile(){      
         bool valid = true;
         if (!isEmpty()) {
             ifstream filein;
@@ -343,8 +349,8 @@ namespace sdds {
                             delete V;
                             V = nullptr;
                         }
-                    }
-                    else flag = true;
+                   }
+                    else  flag = true;
                 } while (!flag&& m_numOfparkedVehicles < m_numOfSpot);
             }
         }
@@ -410,6 +416,7 @@ namespace sdds {
         }
         return res;
     }
+
     void Parking::pause() const{
         cout << "Press <ENTER> to continue...";
         cin.ignore();
