@@ -123,23 +123,9 @@ namespace sdds {
     //This comparison is NOT case sensitive (i.e. “123ABC” is the same as “123abc”).
     //If any value is invalid, this function returns false;
 
-    bool Vehicle::operator==(const char* licensePlate) const {
-        bool identical = false;
-        if (!this->isEmpty() && licensePlate != nullptr && licensePlate[0] != '\0' && strlen(licensePlate) <= MAX_CHARACTERS) {
-            if (this->m_licensePlate == licensePlate) {
-                identical = true;
-            }         
-        }
-        return identical;
+     bool Vehicle::operator==(const char* licensePlate) const {
+         return (strcmp(m_licensePlate, licensePlate) == 0);
     }
-    /* bool Vehicle::operator==(const char* licensePlate) const {
-        bool identical = false;
-        if (licensePlate != nullptr && licensePlate[0] != '\0' && strlen(licensePlate) <= MAX_CHARACTERS) {
-            if (strcmp(m_licensePlate, licensePlate))
-                identical = true;
-        }
-        return identical;
-    }*/
        
     //Compares two Vehicles and if they have the same license plate, it will return true, or else it returns false. 
     //This comparison is NOT case-sensitive.If any value is invalid, this function returns false;
@@ -172,7 +158,6 @@ namespace sdds {
                 }
                 toupper(m_licensePlate);
                 cout << "Enter Make and Model: ";
-                //istr >> makeModel;
                 istr.getline(makeModel, 61);
                 if (strlen(makeModel) < 2 || strlen(makeModel) > 60) {
                     cout << "Invalid Make and model, try again: ";
@@ -194,7 +179,7 @@ namespace sdds {
             ostr << "Invalid Vehicle Object" << endl;
         }
         else {
-            writeType();
+            //writeType();
             if (isCsv()) {
                 ostr << m_parkingLotNum << "," << m_licensePlate << "," << m_makeModel << ",";
             }

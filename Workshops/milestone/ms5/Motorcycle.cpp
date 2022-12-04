@@ -104,11 +104,12 @@ namespace sdds {
             ostr << "Invalid Motorcycle Object" << endl;
         }
         else {
-            Vehicle::write(ostr);
             if (isCsv()) {
+                Vehicle::write(ostr);
                 ostr << m_sidecar << endl;
             }
             else {
+                Vehicle::write(ostr);
                 if (m_sidecar) {
                     ostr << "With Sidecar" << endl;
                 }

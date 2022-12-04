@@ -66,6 +66,7 @@ namespace sdds {
     }
     //destructor
     Parking::~Parking() { 
+        saveDataFile();
         delete[] m_filename;
         m_filename = nullptr;
         for (int i = 0; i < MAX_PARKINGSPOT; i++) {
@@ -99,8 +100,7 @@ namespace sdds {
                 valid = false;
             }
         } while (!valid);
-        return res;
-        
+        return res;      
     }
 
     //isEmpty function that returns true if the Parking is in an invalid empty State or false if the 
@@ -155,6 +155,7 @@ namespace sdds {
                             parkingSpot[i]->setParkingSpot(i + 1);
                             m_numOfparkedVehicles++;
                             cout << "\nParking Ticket" << endl;
+                            parkingSpot[i]->writeType(cout);
                             cout << *parkingSpot[i] << endl;       
                             valid = false;
                         }
@@ -163,7 +164,7 @@ namespace sdds {
             }
         }
     }
-    //need to be fix
+
     //This function does not receive or return anything and only prints the corresponding message
     void Parking::returnVehicle(){
         char licensePlate[MAX_CHARACTERS + 1]{};
@@ -189,7 +190,9 @@ namespace sdds {
                 if (*parkingSpot[i] == licensePlate) {
                     cout << endl << "Returning: " << endl;
                     parkingSpot[i]->setCsv(false);
-                    cout << parkingSpot[i]<< endl;
+                    parkingSpot[i]->writeType(cout);
+                    parkingSpot[i]->write();
+                    cout << endl;
                     delete parkingSpot[i];
                     parkingSpot[i] = nullptr;
                     m_numOfparkedVehicles--;
@@ -199,7 +202,6 @@ namespace sdds {
         }
         if (found) {
             cout << "\nLicense plate " << licensePlate << " Not found\n" << endl;
-            pause();
         }
     }
              
@@ -210,12 +212,13 @@ namespace sdds {
         for (int i = 0; i < m_numOfSpot; i++) {
             if (parkingSpot[i] != nullptr) {
                 parkingSpot[i]->setCsv(false);
+                parkingSpot[i]->writeType(cout);
                 cout << *parkingSpot[i];
                 cout << "-------------------------------" << endl;
             }
         }
     }
-    //need to be fix
+
     void Parking::findVehicle() {
         char licensePlate[MAX_CHARACTERS + 1]{};
         bool invalid;
@@ -238,19 +241,18 @@ namespace sdds {
         for (int i = 0; i < m_numOfSpot && found; i++) {
             if (parkingSpot[i] != nullptr) {
                 if (*parkingSpot[i] == licensePlate) {
-                    cout << "Vechicle found: " << endl;
+                    cout << "\nVechicle found: " << endl;
                     parkingSpot[i]->setCsv(false);
-                    cout << parkingSpot[i] << endl;
-                    delete parkingSpot[i];
-                    parkingSpot[i] = nullptr;
-                    m_numOfparkedVehicles--;
+                    parkingSpot[i]->writeType(cout);
+                    parkingSpot[i]->write();
+                    cout << endl;
                     found = false;                
                 }
             }
         }
         if (found) {
             cout << "\nLicense plate " << licensePlate << " Not found\n" << endl;
-            pause();
+            //pause();
         }
     }
     /*This function does not receive anything and returns a Boolean.
@@ -272,10 +274,11 @@ namespace sdds {
                         cout << endl << "Towing request" << endl;
                         cout << "*********************" << endl;
                         parkingSpot[i]->setCsv(false);
+                        parkingSpot[i]->writeType(cout);
                         cout << *parkingSpot[i];
                         delete parkingSpot[i];
                         parkingSpot[i] = nullptr;
-                        m_numOfparkedVehicles--;                     
+                        m_numOfparkedVehicles--;                       
                     }
                 }
                 valid = true;
@@ -363,8 +366,9 @@ namespace sdds {
             if (fileout) {
                 for (int i = 0; i < m_numOfSpot; i++) {
                     if (parkingSpot[i] != nullptr) {
-                        parkingSpot[i]->setCsv(true);
-                        fileout << *parkingSpot[i];
+                        parkingSpot[i]->setCsv(true);                     
+                        parkingSpot[i]->writeType(fileout);
+                        parkingSpot[i]->write(fileout);
                     }
                 }
             }
@@ -387,19 +391,22 @@ namespace sdds {
                 {
                 case 1:
                     parkVehicle();
+                    pause();
                     break;
                 case 2:
                     returnVehicle();
+                    pause();
                     break;
                 case 3:
                     listParkedVehicles();
+                    pause();
                     break;
                 case 4:
                     findVehicle();
+                    pause();
                     break;
                 case 5:
-                    if (closeParking()) {
-                        saveDataFile();
+                    if (closeParking()) {;
                         valid = false;
                     };
                     break;

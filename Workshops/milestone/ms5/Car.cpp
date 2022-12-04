@@ -104,11 +104,12 @@ namespace sdds {
 			ostr << "Invalid Car Object" << endl;
 		}
 		else {
-			Vehicle::write(ostr);
 			if (isCsv()) {
+				Vehicle::write(ostr);
 				ostr << m_carWash << endl;
 			}
 			else {
+				Vehicle::write(ostr);
 				if (m_carWash) {
 					ostr << "With Carwash" << endl;
 				}
