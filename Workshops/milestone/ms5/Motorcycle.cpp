@@ -5,7 +5,7 @@ Full Name  : Chunxue You(Sharon)
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
-Date       : 2022-11-27
+Date       : 2022-12-04
 
 Authenticity Declaration:
 I declare this submission is the result of my own work and has not been
@@ -24,6 +24,7 @@ namespace sdds {
         m_sidecar = false;
     }
 
+    //two argument constructor, pass the value from base class
     Motorcycle::Motorcycle(const char* licensePlate, const char* makeModel) :Vehicle(licensePlate, makeModel) {
     }
 
@@ -33,6 +34,7 @@ namespace sdds {
         operator = (M);
         ReadWritable::setCsv(false);
     }
+    //copy assigment operator
     Motorcycle& Motorcycle::operator=(const Motorcycle& M) {
         if (this != &M) {
             Vehicle::operator=(M);
@@ -40,29 +42,6 @@ namespace sdds {
         }
         return *this;
     }
-
-    bool Motorcycle::isValid() const {
-        string select;
-        bool res, valid;
-        do {
-            valid = true;
-            cin >> select;
-            cin.ignore(1000, '\n');
-
-            if (select == "Y" || select == "y") {
-                res = true;
-            }
-            else if (select == "N" || select == "n") {
-                res = false;
-            }
-            else {
-                cout << "Invalid response, only (Y)es or (N)o are acceptable, retry: ";
-                valid = false;
-            }
-        } while (!valid);
-        return res;
-    }
-
 
     //Override the pure virtual method writeType to write "M," 
     //if the object is in comma - separated values format(isCsv()), 

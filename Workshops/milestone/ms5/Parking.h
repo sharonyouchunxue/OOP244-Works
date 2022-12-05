@@ -5,7 +5,7 @@ Full Name  : Chunxue You(Sharon)
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
-Date       : 2022-11-27
+Date       : 2022-12-04
 
 Authenticity Declaration:
 I declare this submission is the result of my own work and has not been
@@ -33,7 +33,6 @@ namespace sdds {
         Vehicle* parkingSpot[MAX_PARKINGSPOT]{}; //Parking Spots:
         int m_numOfparkedVehicles{};//Number of Parked Vehicles,always less than Max parking spot
         void setEmpty();
-        bool isValid()const;
         bool isEmpty()const;
         void parkingStatus()const;
         void parkVehicle();

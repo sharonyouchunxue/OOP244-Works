@@ -17,7 +17,7 @@ complete my workshops and assignments.
 #ifndef SDDS_UTILS_H__
 #define SDDS_UTILS_H__
 namespace sdds {
-
+    bool isValid();
 
 
 }

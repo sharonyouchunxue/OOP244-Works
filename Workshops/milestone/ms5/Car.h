@@ -5,7 +5,7 @@ Full Name  : Chunxue You(Sharon)
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
-Date       : 2022-11-27
+Date       : 2022-12-04
 
 Authenticity Declaration:
 I declare this submission is the result of my own work and has not been
@@ -26,7 +26,6 @@ namespace sdds {
         //rule of three, should be safely copied to another car
         Car(const Car& C);
         Car& operator=(const Car& C);
-        bool isValid()const;
         std::ostream& writeType(std::ostream& ostr = std::cout)const;
         std::istream& read(std::istream& istr = std::cin);
         std::ostream& write(std::ostream& ostr = std::cout)const;

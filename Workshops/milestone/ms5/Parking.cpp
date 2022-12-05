@@ -5,7 +5,7 @@ Full Name  : Chunxue You(Sharon)
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
-Date       : 2022-11-27
+Date       : 2022-12-04
 
 Authenticity Declaration:
 I declare this submission is the result of my own work and has not been
@@ -19,15 +19,16 @@ complete my workshops and assignments.
 #include <iostream>
 #include <cstring>
 #include <string>
-#include "Utils.h"
 #include "Parking.h"
-#include "Vehicle.h"
 using namespace std;
 
 namespace sdds {
+    //no argument constructor, set to empty state
     Parking::Parking(){
         setEmpty();
     }
+
+    //invalid empty state
     void Parking::setEmpty(){
         m_filename = nullptr;
         for (int i = 0; i < MAX_CHARACTERS; i++) {
@@ -47,6 +48,7 @@ namespace sdds {
         else {
             m_numOfSpot = 0;
         }
+        //loadDataFile to display the parking menu items
         if (loadDataFile()) {
             m_parkingMenu.setTitle("Parking Menu, select an action:");
             m_parkingMenu.setIndentation(0);
@@ -64,7 +66,8 @@ namespace sdds {
             cout << "Error in data file" << endl;
         }
     }
-    //destructor
+
+    //destructor, saveDatafile and free memories
     Parking::~Parking() { 
         saveDataFile();
         delete[] m_filename;
@@ -75,32 +78,12 @@ namespace sdds {
         }       
     }
 
+    //setFileName function to dynamic allocate the filename
     void Parking::setFileName(const char* filename) {
         if (filename != nullptr && filename[0] != '\0') {
             m_filename = new char[strlen(filename) + 1];
             strcpy(m_filename, filename);
         }
-    }
-
-    bool Parking::isValid() const{
-        string select;
-        bool res, valid;
-        do {
-            valid = true;
-            cin >> select;
-            cin.ignore(1000, '\n');
-            if (select == "Y" || select == "y") {
-                res = true;
-            }
-            else if (select == "N" || select == "n") {
-                res = false;
-            }
-            else {
-                cout << "Invalid response, only (Y)es or (N)o are acceptable, retry: ";
-                valid = false;
-            }
-        } while (!valid);
-        return res;      
     }
 
     //isEmpty function that returns true if the Parking is in an invalid empty State or false if the 
@@ -109,11 +92,11 @@ namespace sdds {
         return m_filename == nullptr;
     }
 
-    //does not receive or return anything and at this stage only prints:
-    //******Valet Parking****** <NEWLINE>
+    //does not receive or return anything and prints:
+    // print the number of available Parking Spots with formating
     void Parking::parkingStatus() const {
         cout << "****** Valet Parking ******" << endl;
-        cout << "***** Available spots: ";
+        cout << "*****  Available spots: ";
         cout.width(4);
         cout.setf(ios::left);
         cout << m_numOfSpot - m_numOfparkedVehicles << " *****" << endl;
@@ -121,25 +104,27 @@ namespace sdds {
     }
 
     //This function does not receive or return anything.
-    //The function displays the Vehicle Selection sub - menu.Then based on the user's selection; 
-    //Car, Motorcycle or Cancel, it will print the corresponding message. Afterwards, it goes to a new line.
     void Parking::parkVehicle() {
+        //if number pf spot == number pf vehicle parked, then parking is full
         if (m_numOfSpot == m_numOfparkedVehicles) {
             cout << "Parking is full" << endl;
         }
         else {
+            //run the vehicle selection menu
             int selection = m_vSelectionMenu.run();
+            //if user select 3, shows parking cancelled
             if (selection == 3) {
                 cout << "Parking Cancelled";
             }
             else {
+                //create an instance of a Car or Motorcycle type in a Vehicle pointer.
                 Vehicle* vehicleType{};
                 if (selection == 1) {
-                    //dynamically create an instance of a Car
+                    //if user select 1, dynamically create an instance of a Car
                     vehicleType = new Car();
                 }
                 else if (selection == 2) {
-                    //dynamically create an instance of a Motorcycle
+                    //if user select 2 dynamically create an instance of a Motorcycle
                     vehicleType = new Motorcycle();
                 }
                 //set it NOT to be in Comma Separated mode
@@ -148,15 +133,21 @@ namespace sdds {
                 cin >> *vehicleType;
 
                 bool valid = true;
+                // search through the Parking Spots array and finds the first available(null) Parking Spot
                 if (valid && m_numOfparkedVehicles < m_numOfSpot) {
                     for (int i = 0; i < m_numOfSpot && valid; i++) {
                         if (parkingSpot[i] == nullptr) {
+                            //sets it to the Vehicle pointer
                             parkingSpot[i] = vehicleType;
+                            //set the Parking Spot member variable of the Vehicle to the spot number it was parked in (index + 1)
                             parkingSpot[i]->setParkingSpot(i + 1);
+                            //number of parked Vehicle increment by 1
                             m_numOfparkedVehicles++;
                             cout << "\nParking Ticket" << endl;
+                            //print the type of vehicle to the console
                             parkingSpot[i]->writeType(cout);
-                            cout << *parkingSpot[i] << endl;       
+                            //prints the Vehicle information to the console
+                            cout << *parkingSpot[i] << endl;    
                             valid = false;
                         }
                     }
@@ -170,45 +161,59 @@ namespace sdds {
         char licensePlate[MAX_CHARACTERS + 1]{};
         bool invalid;
         cout << "Return Vehicle" << endl;
-        cout << "Enter Licence Plate Number: ";
+        cout << "Enter License Plate Number: ";
         do {
             invalid = false;
+            //Prompt the user for the license plate
             cin >> licensePlate;
             cin.ignore();
+            //validate the string length for license plate that user entered
             if (strlen(licensePlate) < 1 || strlen(licensePlate) > 8) {
                 cout << "Invalid Licence Plate, try again: ";
                 invalid = true;
             }
         } while (invalid);
-        for (int i = 0; i < strlen(licensePlate); i++) {
+        //to convert the license plate from lowercase to uppercase
+        int len = strlen(licensePlate);
+        for (int i = 0; i < len; i++) {
             licensePlate[i] = toupper(licensePlate[i]);
         }
 
         bool found = true;
+        //search through the parked Vehicles for a matching license plate, if it matches, then print the corresponding info
         for (int i = 0; i < m_numOfSpot && found; i++) {
             if (parkingSpot[i] != nullptr){
+                //if the parked Vehicle is matching the license plate that user entered
                 if (*parkingSpot[i] == licensePlate) {
-                    cout << endl << "Returning: " << endl;
+                    //print Returning header message out to the console
+                    cout << endl << "Returning:" << endl;
+                    //set it NOT to be in Comma Separated mode
                     parkingSpot[i]->setCsv(false);
+                    //print the mathced vehicle type 
                     parkingSpot[i]->writeType(cout);
+                    //print the vehicle information
                     parkingSpot[i]->write();
                     cout << endl;
+                    // delete the Vehicle from the memory and set the Parking Spot element back to nullptr.
                     delete parkingSpot[i];
                     parkingSpot[i] = nullptr;
+                    //number of vehicle parked decrement by 1
                     m_numOfparkedVehicles--;
                     found = false;
                 }
             }
         }
+        //otherwise print license plate is not found
         if (found) {
             cout << "\nLicense plate " << licensePlate << " Not found\n" << endl;
         }
     }
              
-    //oes not receive or return anything and goes through all the Parking Spot elements of the Parking 
+    //does not receive or return anything and goes through all the Parking Spot elements of the Parking 
     //(obviously up to the Number of Spots) and prints all that is not empty (not null) and separates 
     //them with the following line: "-------------------------------"<NEWLINE>
     void Parking::listParkedVehicles() const {
+        cout << "*** List of parked vehicles ***" << endl;
         for (int i = 0; i < m_numOfSpot; i++) {
             if (parkingSpot[i] != nullptr) {
                 parkingSpot[i]->setCsv(false);
@@ -219,6 +224,7 @@ namespace sdds {
         }
     }
 
+    //this function does not receive or return anything, it will find the matched licenplate
     void Parking::findVehicle() {
         char licensePlate[MAX_CHARACTERS + 1]{};
         bool invalid;
@@ -226,33 +232,43 @@ namespace sdds {
         cout << "Enter Licence Plate Number: ";
         do {
             invalid = false;
+            //Prompt the user for the license plate
             cin >> licensePlate;
             cin.ignore();
+            //validate the string length for license plate that user entered
             if (strlen(licensePlate) < 1 || strlen(licensePlate) > 8) {
                 cout << "Invalid Licence Plate, try again: ";
                 invalid = true;
             } 
         } while (invalid);
-        for (int i = 0; i < strlen(licensePlate); i++) {
+        //to convert the license plate from lowercase to uppercase
+        int len = strlen(licensePlate);
+        for (int i = 0; i < len; i++) {
             licensePlate[i] = toupper(licensePlate[i]);
         }
 
         bool found = true;
+        //search through the parked Vehicles for a matching license plate, if it matches, then print the corresponding info
         for (int i = 0; i < m_numOfSpot && found; i++) {
             if (parkingSpot[i] != nullptr) {
+                //if the parked Vehicle is matching the license plate that user entered
                 if (*parkingSpot[i] == licensePlate) {
-                    cout << "\nVechicle found: " << endl;
+                    //print header message out
+                    cout << "\nVehicle found:" << endl;
+                    //set it NOT to be in Comma Separated mode
                     parkingSpot[i]->setCsv(false);
+                    //print the mathced vehicle type 
                     parkingSpot[i]->writeType(cout);
+                    //print the vehicle information
                     parkingSpot[i]->write();
                     cout << endl;
                     found = false;                
                 }
             }
         }
+        //if is not match any of the license plate, print license plate not found
         if (found) {
             cout << "\nLicense plate " << licensePlate << " Not found\n" << endl;
-            //pause();
         }
     }
     /*This function does not receive anything and returns a Boolean.
@@ -260,15 +276,18 @@ namespace sdds {
      if the users response is Yes. Otherwise, return false if the users response is No.*/
     bool Parking::closeParking() {
         bool valid = false;
+        //if the number of parked vehicle == 0, print the closing parking message
         if (m_numOfparkedVehicles == 0) {
             std::cout << "Closing Parking" << endl;
             valid = true;
         }
-        else {
+        else { 
                 cout << "This will Remove and tow all remaining vehicles from the parking!" << endl;
                 cout << "Are you sure? (Y)es/(N)o: ";
+                //valid user entered selectionm if user enter yes, then close the parking,
             if (isValid()) {
                 std::cout << "Closing Parking" << endl;
+                //search through all the parked vehicle, remove and tow all the vehicles, save it to the dataFile
                 for (int i = 0; i < m_numOfSpot; i++) {
                     if (parkingSpot[i] != nullptr) {
                         cout << endl << "Towing request" << endl;
@@ -290,62 +309,60 @@ namespace sdds {
 
     //if the users response is Yes. Otherwise, return false if the users response is No.
     bool Parking::exitParkingApp() const {
-        cout << "This will terminate the program!!" << endl;
+        cout << "This will terminate the program!" << endl;
         cout << "Are you sure? (Y)es/(N)o: ";
-        string select;
-        bool res, valid;
-        do {
-            valid = true;
-            cin >> select;
-            cin.ignore(1000, '\n');
-            if (select == "Y" || select == "y") {
-                res = true;
-            }
-            else if (select == "N" || select == "n") {
-                res = false;
-            }
-            else {
-                cout << "Invalid response, only (Y)es or (N)o are acceptable, retry: ";
-                valid = false;
-            }
-        } while (!valid);
-
-        return res;
+        return isValid();      
     }
+
     //This function does not receive anything and returns a Boolean.
-    //If the Parking is not in an invalid empty state, Print the following : "loading data from " 
-    //and then print the name of the data file followed by a <NEWLINE> and finally return true.
-    //If the Parking is in an invalid empty state, return false (and print nothing).
     bool Parking::loadDataFile(){      
         bool valid = true;
+        //if is not an invalid empty state
         if (!isEmpty()) {
+            //create an instance of the ifstream class
             ifstream filein;
+            //open the file named in the Filename member variable
             filein.open(m_filename);
-
+            //If the opening of the file successfully
+            //Loop through the records of the opened file and read each record into a vehicle pointer
             if (filein) {
                 bool flag = false;
                 do {
+                    //declare character "vehicle type variable
                     char vehicleType{};
+                    //create an instance of V in a Vehicle pointer, initialise it to nullptr
                     Vehicle* V = nullptr;
-
+                    //Extract one Character from the file 
                     filein.get(vehicleType);
+                    //ignore the next
                     filein.ignore();
 
                     if (vehicleType == 'M' || vehicleType == 'C') {
+                        //If the Character is 'M' 
                         if (vehicleType == 'M') {
+                            //create a dynamic instance of a Motorcycle and keep the address in the Vehicle pointer
                             V = new Motorcycle();
                         }
+                        //f the Character is 'C'
                         else if (vehicleType == 'C') {
+                           // create a dynamic instance of a Carand keep the address in the Vehicle pointer
                             V = new Car();
                         }
+                        //f either of the two Vehicles is allocated, then set the Vehicle to Comma Separate Value mode 
                         V->setCsv(true);
+                        //extract its values from the data file.
                         filein >> *V;
-
+                        //If the read was successful 
                         if (V != nullptr) {
+                            //add the Vehicle to the Parking by saving the Vehicle pointer in the element of the Parking Spot array 
+                            //that corresponds to the Parking Spot of the Vehicle
+                            //index of the element of the Parking Spot array is always the Parking Spot number of the Vehicle minus one
                             parkingSpot[V->getParkingSpot() - 1] = V;
                             m_numOfparkedVehicles++;
                         }
                         else {
+                            //if the read was unsuccessful deallocate the Vehicle
+                            //set the function to a false state and end the loop.
                             valid = false;
                             delete V;
                             V = nullptr;
@@ -358,16 +375,23 @@ namespace sdds {
         return valid;
     }
 
-    //This function does not receive or return anything and if the Parking is not in an invalid empty 
-    //state it prints: "Saving data into " then prints the name of the data file followed by a <NEWLINE>.
+    //This function does not receive or return anything
     void Parking::saveDataFile() const {
+        //if the Parking is not in an invalid empty 
         if (!isEmpty()) {
+            //create an instance of the ofstream class
             ofstream fileout(m_filename);
+            //If the file is opened successfully
             if (fileout) {
+                //go through all the elements of the Parking Spots
                 for (int i = 0; i < m_numOfSpot; i++) {
+                    //if they are not null and save the Vehicles pointed by them in the data file
                     if (parkingSpot[i] != nullptr) {
-                        parkingSpot[i]->setCsv(true);                     
+                        //set it in Comma Separated mode.
+                        parkingSpot[i]->setCsv(true);
+                        //write the vehicle type out
                         parkingSpot[i]->writeType(fileout);
+                        //write the vehicle info out
                         parkingSpot[i]->write(fileout);
                     }
                 }
@@ -375,6 +399,7 @@ namespace sdds {
         }
     }
 
+    //Run function in Parking to runs the whole Parking Application 
     int Parking::run() {
         bool res = true;
         if (!isEmpty()) {
@@ -422,8 +447,9 @@ namespace sdds {
         return res;
     }
 
+    //pause function
     void Parking::pause() const{
-        cout << "Press <ENTER> to continue...";
+        cout << "Press <ENTER> to continue....";
         cin.ignore();
     }
 

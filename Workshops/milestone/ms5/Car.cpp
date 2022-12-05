@@ -44,28 +44,6 @@ namespace sdds {
 		return *this;
 	}
 
-	bool Car::isValid() const {
-		string select;
-		bool res, valid;
-		do {
-			valid = true;
-			cin >> select;
-			cin.ignore(1000, '\n');
-			if (select == "Y" || select == "y") {
-				res = true;
-			}
-			else if (select == "N" || select == "n") {
-				res = false;
-			}
-			else {
-				cout << "Invalid response, only (Y)es or (N)o are acceptable, retry: ";
-				valid = false;
-			}
-		} while (!valid);
-		return res;
-	}
-
-
 	//Override the pure virtual method writeType to write "C," 
 	//if the object is in comma-separated values format (isCsv()), 
 	//or otherwise write Vehicle type: Car" and a NEWLINE.

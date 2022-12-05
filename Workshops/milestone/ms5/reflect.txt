@@ -1,0 +1,26 @@
+Reflection - Final Project - Valet Parking Application
+
+For this project I built a valet parking application. The project involved concepts learned throughout the semester to build a valet parking 
+application that can load vehicle information from a datafile, allow for user updates and save the information. The object-oriented 
+programming concepts that I applied for this project include encapsulation, inheritance, and polymorphism. 
+
+For milestone one I created the user interface menu system. With the menu completed, I moved onto milestone two in which I created a mock up 
+application that represents what the valet parking application will look and act like, without having functionality yet. For milestone three,
+I created a prototype of the valet parking application. For milestone four, created the car and motorcycle module. 
+
+For milestone five, I added functionality to valet parking application which was created in milestone two. Prior to adding this functionality
+, there was only a simple console message. This was a challenging milestone because I when I combined the code from the previous milestones, 
+I had to make some modifications to ensure compatibility. 
+
+To complete the whole project, I used almost every concept that we learned during the whole semester. For example, I had to read and write 
+the datafile the using file stream class, as well as how to store the data into my parking object by using function overloading. To complete 
+this task, I applied techniques such as construction, destruction, rule of three, member functions and dynamic memory allocation. I did not 
+borrow any code outside of the course material. I utilized the uppercase converting function, which I partially borrowed from the utils file
+ that the professor provided. 
+
+In conclusion, this project allowed me use various coding techniques to help me understand concepts such as inheritance, which includes 
+derived classes, function in a hierarchy, virtual functions, and abstract base class. Each of the many problems I encountered in running 
+my programs resulted in learning opportunities. An example of such a learning opportunity is when I discovered that I had confused the 
+relationship between base class and child class. 
+
+

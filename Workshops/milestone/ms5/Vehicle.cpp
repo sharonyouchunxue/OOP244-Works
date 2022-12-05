@@ -5,7 +5,7 @@ Full Name  : Chunxue You(Sharon)
 Student ID#: 127632214
 Email      : cyou8@myseneca.ca
 Section    : OOP244 NAA
-Date       : 2022-11-27
+Date       : 2022-12-04
 
 Authenticity Declaration:
 I declare this submission is the result of my own work and has not been
@@ -22,6 +22,11 @@ complete my workshops and assignments.
 #include "Utils.h"
 using namespace std;
 namespace sdds {
+    //no argument constructor
+    Vehicle::Vehicle() {
+        setEmpty();
+    }
+
     //This function returns a read-only address of the license plate of the Vehicle.
     const char* Vehicle::getLicensePlate() const {
         return m_licensePlate;
@@ -30,6 +35,7 @@ namespace sdds {
     const char* Vehicle::getMakeModel() const {
         return m_makeModel;
     }
+    //convert lowercase to uppercase
     char Vehicle::toupper(char* ch)const {
         int size = strlen(ch) + 1;
         for (int i = 0; i < size; i++) {
@@ -38,10 +44,7 @@ namespace sdds {
         return *ch;
     }
 
-    Vehicle::Vehicle() {
-        setEmpty();
-    }
-
+    //destructor, free the memory for make model
     Vehicle::~Vehicle() {
         delete[] m_makeModel;
         m_makeModel = nullptr;
@@ -60,11 +63,13 @@ namespace sdds {
         }
     }
 
+    //copy constructor
     Vehicle::Vehicle(const Vehicle& V) {
         setEmpty();
         *this = V;
     };
 
+    //copy assignment operator
     Vehicle& Vehicle::operator=(const Vehicle& V) {
         if (this != &V) {
             if (V.m_licensePlate != nullptr) {
@@ -137,6 +142,7 @@ namespace sdds {
         return identical;
     }
 
+    //This function overrides the Read of the ReadWritable class
     std::istream& Vehicle::read(std::istream& istr) {
         char makeModel[61]{};
         if (!(istr.fail())) {
@@ -174,12 +180,13 @@ namespace sdds {
         return istr;
     }
 
+    //If the Vehicle is in an invalid empty state, this function will write the corresponding message 
+    //using the ostream object and returns it.
     std::ostream& Vehicle::write(std::ostream& ostr) const {
         if (isEmpty()) {
             ostr << "Invalid Vehicle Object" << endl;
         }
         else {
-            //writeType();
             if (isCsv()) {
                 ostr << m_parkingLotNum << "," << m_licensePlate << "," << m_makeModel << ",";
             }
