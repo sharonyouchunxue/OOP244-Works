@@ -1,4 +1,5 @@
 Workshop #7: Derived Classes
+
 Version 1
 In this workshop, you will work with classes that make up the hierarchical structure. The base or parent class will be a VehicleBasic that holds common attributes of a vehicle with an engine then the child class Dumper will be derived from the parent class. In addition to this hierarchy, we will define custom input/output operators for these classes.
 
